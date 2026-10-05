@@ -1,0 +1,40 @@
+---
+import Page from "../../layouts/Page.astro";
+import { software } from "../../data/software";
+import type { Software } from "../../data/software";
+import ArrowLeft from "../../assets/icons/arrow-left.svg"
+
+export function getStaticPaths() {
+  return software.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+interface Props {
+  item: Software;
+}
+
+const { item } = Astro.props;
+---
+
+<Page title={item.title} description={item.description}>
+  <section class="flex flex-col items-center gap-8 w-full py-20 px-4">
+    <a
+      href="/#software"
+      class="flex items-center gap-1.5 text-neutral-600 hover:text-neutral-900 transition"
+    >
+      <ArrowLeft class="size-5" aria-hidden="true" />
+      <span>All software</span>
+    </a>
+    <h1 class="text-center font-bold text-5xl max-w-xl">{item.title}</h1>
+    <p class="text-lg max-w-lg text-center">{item.description}</p>
+    <a
+      href={item.appUrl}
+      class="rounded-full bg-(--app-bg) text-(--app-text) px-6 py-3 font-semibold transition hover:brightness-130 active:brightness-95"
+      style={`--app-bg: ${item.appBgColor}; --app-text: ${item.appTextColor};`}
+    >
+      Get Started
+    </a>
+  </section>
+</Page>

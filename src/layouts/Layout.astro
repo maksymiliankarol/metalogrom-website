@@ -1,23 +1,40 @@
+---
+import '../styles/global.css';
+import { Font } from 'astro:assets';
+import SEO from '../components/SEO.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { siteGraph } from '../data/schema';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  noindex?: boolean;
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article';
+}
+
+const { title, description, canonicalPath, noindex, image, imageAlt, type } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-bbh-hegarty" />
+    <Font cssVariable="--font-caprasimo" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO {title} {description} {canonicalPath} {noindex} {image} {imageAlt} {type} />    <JsonLd data={siteGraph} />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
