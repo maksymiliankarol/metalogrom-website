@@ -10,23 +10,11 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Inter',
-      cssVariable: '--font-inter',
+      name: 'Open Sans',
+      cssVariable: '--font-open-sans',
       weights: [400, 600],
       subsets: ['latin'],
       fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: "BBH Hegarty",
-      cssVariable: "--font-bbh-hegarty",
-      fallbacks: ["sans-serif"]
-    },
-    {
-      provider: fontProviders.google(),
-      name: "Caprasimo",
-      cssVariable: "--font-caprasimo",
-      fallbacks: ["serif"]
     }
   ],
 

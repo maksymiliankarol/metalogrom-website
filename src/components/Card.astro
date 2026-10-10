@@ -1,34 +1,86 @@
 ---
-interface Props {
-  slug: string;
-  title: string;
-  tagline: string;
-  href: string;
+import type { HTMLAttributes } from "astro/types"
+
+type CardLayout = "icon-center"
+
+const base = "grid p-4 border"
+const square = "aspect-square overflow-hidden"
+
+// Shared by every solid color; reads the accent from --card.
+const solid =
+  "bg-linear-to-r from-[color-mix(in_oklab,var(--card),black_15%)] to-(color:--card) border-[color-mix(in_oklab,var(--card),white_10%)] text-white"
+const solidHover = "hover:brightness-90 transition"
+
+const neutral = {
+  idle: "border-foreground/15 bg-foreground/5",
+  hover: "hover:bg-foreground/10 transition",
+}
+
+// Each accent only sets --card. To add a color, define --name in CSS and add a line here.
+const accents = {
+  green: "[--card:var(--green)]",
+  blue: "[--card:var(--blue)]",
+  red: "[--card:var(--red)]",
+  orange: "[--card:var(--orange)]",
+  lime: "[--card:var(--lime)]",
+  teal: "[--card:var(--teal)]",
+  cyan: "[--card:var(--cyan)]",
+  indigo: "[--card:var(--indigo)]",
+  purple: "[--card:var(--purple)]",
+  magenta: "[--card:var(--magenta)]",
+  pink: "[--card:var(--pink)]",
+  crimson: "[--card:var(--crimson)]",
+  amber: "[--card:var(--amber)]",
+  brown: "[--card:var(--brown)]",
+  steel: "[--card:var(--steel)]",
+  grey: "[--card:var(--grey)]",
+}
+
+type CardColor = "neutral" | keyof typeof accents
+
+export interface Props extends Omit<HTMLAttributes<"div">, "color"> {
+  icon: (props: HTMLAttributes<"svg">) => any
+  label: string
+  layout?: CardLayout
+  color?: CardColor
+  href?: string
+  auto?: boolean
+}
+
+// Both elements share one grid cell and are positioned inside it.
+const layouts: Record<CardLayout, { icon: string; label: string }> = {
+  "icon-center": {
+    icon: "col-start-1 row-start-1 place-self-center size-12",
+    label: "col-start-1 row-start-1 self-end justify-self-start",
+  },
 }
 
 const {
-  slug,
-  title,
-  tagline,
+  icon: Icon,
+  label,
+  layout = "icon-center",
+  color = "neutral",
   href,
-} = Astro.props;
+  auto = false,
+  class: className,
+  ...rest
+} = Astro.props
 
-const logos = import.meta.glob<{ default: any }>("../assets/logos/*.svg", {
-  eager: true,
-});
-
-const Logo = logos[`../assets/logos/${slug}.svg`]?.default;
+const isNeutral = color === "neutral"
+const Tag = href ? "a" : "div"
+const attrs = href ? { href, ...rest } : rest
 ---
 
-<a
-  href={href}
-  class="group rounded-xl overflow-hidden divide-y-2 divide-neutral-300 border-2 border-neutral-300 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0.5 active:shadow-sm"
+<Tag
+  class:list={[
+    base,
+    isNeutral ? neutral.idle : [solid, accents[color]],
+    !auto && square,
+    href && (isNeutral ? neutral.hover : solidHover),
+    className,
+  ]}
+  {...attrs}
 >
-  <div class="p-4 pt-6 flex flex-col gap-3 items-center justify-center">
-    {Logo && <Logo class="w-full h-10" />}
-    <h3 class="text-xl">{title}</h3>
-  </div>
-  <div class="p-4">
-    <p>{tagline}</p>
-  </div>
-</a>
+  <Icon class={layouts[layout].icon} />
+  <span class={layouts[layout].label}>{label}</span>
+</Tag>

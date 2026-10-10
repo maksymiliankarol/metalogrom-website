@@ -1,5 +1,5 @@
 ---
-import '../styles/global.css';
+import '../styles/index.css';
 import { Font } from 'astro:assets';
 import SEO from '../components/SEO.astro';
 import JsonLd from '../components/JsonLd.astro';
@@ -23,14 +23,12 @@ const { title, description, canonicalPath, noindex, image, imageAlt, type } = As
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <Font cssVariable="--font-inter" preload />
-    <Font cssVariable="--font-bbh-hegarty" />
-    <Font cssVariable="--font-caprasimo" />
+    <Font cssVariable="--font-open-sans" preload />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#11233b" />
     <meta name="generator" content={Astro.generator} />
     <SEO {title} {description} {canonicalPath} {noindex} {image} {imageAlt} {type} />    <JsonLd data={siteGraph} />
   </head>

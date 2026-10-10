@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@import "./wallpaper.css";
+
+/* ---------- Theme tokens ---------- */
+
+:root {
+  color-scheme: dark;
+
+  --background: #000;
+  --foreground: #fff;
+  --error: #ff2424;
+  --success: #39ee15;
+
+  /* Accent colors */
+  --green: #008a00;
+  --lime: #6a8f00;
+  --teal: #008a87;
+  --cyan: #0b84b8;
+  --blue: #1e6fd0;
+  --indigo: #2f35c9;
+  --purple: #8b1fbf;
+  --magenta: #b8006b;
+  --pink: #d03f8c;
+  --crimson: #960a24;
+  --red: #c01100;
+  --orange: #d85a00;
+  --amber: #c77800;
+  --brown: #7a4a22;
+  --steel: #546a7d;
+  --grey: #5c5f66;
+
+  /* Wallpaper */
+  --wp-hue: 255;
+  --wp-l-base: 0.36;
+  --wp-l-deep: 0.2;
+  --wp-c-scale: 1;
+  --wp-shape: oklch(1 0 0 / 0.05);
+  --wp-shade: oklch(0 0 0 / 0.25);
+}
+
+/* ---------- Tailwind theme ---------- */
+
+@theme inline {
+  --font-sans: var(--font-open-sans);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-error: var(--error);
+  --color-success: var(--success);
+
+  --color-green: var(--green);
+  --color-blue: var(--blue);
+  --color-red: var(--red);
+  --color-orange: var(--orange);
+}
+
+/* ---------- Base ---------- */
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ---------- Media ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
