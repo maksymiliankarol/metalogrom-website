@@ -2,7 +2,10 @@
 import Page from "../../layouts/Page.astro";
 import { software } from "../../data/software";
 import type { Software } from "../../data/software";
-import ArrowBack from "../../assets/icons/arrow-back.svg"
+import ChevronLeft from "../../assets/icons/chevron-left.svg"
+import Card from "../../components/Card.astro";
+import Warning from "../../assets/icons/warning.svg"
+import Button from "../../components/Button.astro";
 
 export function getStaticPaths() {
   return software.map((item) => ({
@@ -19,25 +22,30 @@ const { item } = Astro.props;
 ---
 
 <Page>
-  <div class="w-full max-w-2xl space-y-16 p-4 md:py-16">
-    <div class="mx-auto bg-background/20 border border-foreground/10 h-full">
-      <header class="p-4 bg-background/30">
-        <a href="/#software" class="group flex items-center gap-2 underline hover:decoration-2 cursor-pointer">
-          <ArrowBack />
-          <span>All software</span>
-        </a>
-      </header>
-      <section class="p-4 py-8 space-y-8">
-        <h1 class="text-4xl">
-          {item.title}
-        </h1>
-        <p>
-          {item.description}
-        </p>
-        <button>
-          Get started
-        </button>
-      </section> 
+  <div class="w-full max-w-xl space-y-16 p-4 md:py-16">
+    <div class="mx-auto h-full flex flex-col gap-6">
+      <Button 
+        href="/#software" 
+        variant="ghost"
+        class="w-fit"
+      >
+        <ChevronLeft />
+        All Software
+      </Button>
+
+      <div class="grid grid-cols-3">
+        <Card 
+          class="col-span-3 aspect-2/1! md:aspect-3/1!"
+          href={item.appUrl}
+          icon={Warning}
+          label={item.title}
+          color="indigo"
+        />
+      </div>
+      <p class="text-foreground/60">{item.description}</p>
+      <Button class="justify-center">
+        Get Started
+      </Button>
     </div> 
   </div>
 </Page>

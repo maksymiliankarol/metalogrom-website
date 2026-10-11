@@ -2,43 +2,32 @@
 type WallpaperVariant = "glow" | "beams" | "discs" | "rings" | "wedge"
 
 export interface Props {
-  /** One variant or several stacked on top of each other. Default: "discs" */
+  /** One variant or several stacked. Default: "discs" */
   variant?: WallpaperVariant | WallpaperVariant[]
-  /** Same seed = same wallpaper. Change it to get a different layout. */
+  /** Same seed = same wallpaper. */
   seed?: string | number
-
-  /* ----- Color ----- */
   /** Main hue, 0-360. Default 255 (blue). */
   hue?: number
   /** Hue offset between the two ends of the base gradient. Default 25. */
   hueShift?: number
-  /** Color intensity of the base gradient, 0-0.3. Default 0.15. */
+  /** Color intensity, 0-0.3. Lower = more neutral. Default 0.15. */
   chroma?: number
-  /** Lightness offset applied to both gradient ends, -0.2 to 0.2. Default 0. */
+  /** Lightness offset for both gradient ends, about -0.35 (near black) to 0.2. Default 0. */
   lightness?: number
-
-  /* ----- Shapes ----- */
-  /** Base gradient angle in degrees. Random from the seed if omitted. */
-  angle?: number
-  /** How many shapes per variant. Default 4. */
+  /** Shapes per variant. Default 4. */
   count?: number
   /** Shape size multiplier. Default 1. */
   scale?: number
-  /** Shape opacity multiplier, 0-2. Default 1. */
-  intensity?: number
   /** Edge softness, 0 (crisp) to 1 (blurred). Default 0. */
   softness?: number
-
-  /* ----- Texture ----- */
-  /** Film grain opacity, 0-1. Default 0. Keep it under 0.3. */
-  grain?: number
-
-  /* ----- Placement ----- */
-  /** "absolute" fills the nearest positioned parent, "fixed" fills the viewport. */
-  position?: "absolute" | "fixed"
-  class?: string
-  style?: string
 }
+
+/* ---------- Constants (dark theme only) ---------- */
+
+const L_BASE = 0.36
+const L_DEEP = 0.2
+const LIGHT = "oklch(1 0 0 / 0.05)"
+const DARK = "oklch(0 0 0 / 0.25)"
 
 /* ---------- Seeded random ---------- */
 
@@ -63,110 +52,89 @@ function mulberry32(a: number) {
   }
 }
 
-type Rng = () => number
 const n = (v: number) => +v.toFixed(2)
 const clamp = (v: number, min: number, max: number) =>
   Math.min(max, Math.max(min, v))
 
+/* ---------- Layer builders ---------- */
+/* Each returns an array of CSS gradient strings. */
+
 interface LayerOptions {
-  rng: Rng
+  rng: () => number
   count: number
   scale: number
   softness: number
   angle: number
+  hue: number
   hueShift: number
   chroma: number
 }
 
-const LIGHT = "var(--wp-shape)"
-const DARK = "var(--wp-shade)"
-
-/* ---------- Layer builders ---------- */
-/* Each returns an array of CSS gradient strings. */
-
-function glowLayers({ rng, count, hueShift, chroma }: LayerOptions): string[] {
-  return Array.from({ length: clamp(count, 2, 4) }, () => {
-    // Anchor glows near edges and corners
-    const x = rng() < 0.5 ? rng() * 25 : 75 + rng() * 25
-    const y = rng() < 0.5 ? rng() * 25 : 75 + rng() * 25
-    const w = 50 + rng() * 30
-    const h = 60 + rng() * 30
-    const l = 0.55 + rng() * 0.3
-    const offset = n((rng() * 2 - 1) * Math.max(hueShift, 20) * 1.4)
-    const alpha = n(0.35 + rng() * 0.25)
-    const color = `oklch(${n(l)} ${n(chroma * 1.2)} calc(var(--wp-hue) + ${offset}) / calc(${alpha} * var(--wp-intensity)))`
-    return `radial-gradient(${n(w)}% ${n(h)}% at ${n(x)}% ${n(y)}%, ${color}, transparent 65%)`
-  })
-}
-
-function discLayers({ rng, count, scale, softness }: LayerOptions): string[] {
-  const soft = 0.2 + softness * 14
-  return Array.from({ length: count }, () => {
-    const x = rng() * 100
-    const y = rng() * 100
-    const r = (8 + rng() * 24) * scale
-    const color = rng() > 0.45 ? LIGHT : DARK
-    return `radial-gradient(circle at ${n(x)}% ${n(y)}%, ${color} 0 ${n(r)}%, transparent ${n(r + soft)}%)`
-  })
-}
-
-function beamLayers({
-  rng,
-  count,
-  scale,
-  softness,
-  angle,
-}: LayerOptions): string[] {
-  const feather = softness * 10
-  return Array.from({ length: count }, () => {
-    const start = rng() * 75
-    const width = (6 + rng() * 22) * scale
-    const end = start + width
-    const a = angle + 20 + (rng() * 2 - 1) * 8
-    const color = rng() > 0.4 ? LIGHT : DARK
-    return `linear-gradient(${n(a)}deg, transparent ${n(start - feather)}%, ${color} ${n(start)}% ${n(end)}%, transparent ${n(end + feather)}%)`
-  })
-}
-
-function ringLayers({ rng, count, scale, softness }: LayerOptions): string[] {
-  const cx = 20 + rng() * 60
-  const cy = 20 + rng() * 60
-  const feather = softness * 4
-  return Array.from({ length: count }, (_, i) => {
-    const r = (8 + (i / Math.max(count, 1)) * 60 + rng() * 6) * scale
-    const t = (1.5 + rng() * 5) * scale
-    const color = rng() > 0.4 ? LIGHT : DARK
-    return `radial-gradient(circle at ${n(cx)}% ${n(cy)}%, transparent ${n(r - feather)}%, ${color} ${n(r)}% ${n(r + t)}%, transparent ${n(r + t + feather)}%)`
-  })
-}
-
-function wedgeLayers({
-  rng,
-  count,
-  softness,
-  angle,
-}: LayerOptions): string[] {
-  const feather = softness * 12
-  return Array.from({ length: clamp(count, 1, 3) }, () => {
-    const p = 25 + rng() * 55
-    const a = angle + (rng() * 2 - 1) * 25
-    const color = rng() > 0.5 ? LIGHT : DARK
-    return `linear-gradient(${n(a)}deg, transparent ${n(p - feather)}%, ${color} ${n(p + feather)}%)`
-  })
-}
-
 const BUILDERS: Record<WallpaperVariant, (o: LayerOptions) => string[]> = {
-  glow: glowLayers,
-  discs: discLayers,
-  beams: beamLayers,
-  rings: ringLayers,
-  wedge: wedgeLayers,
+  // Large soft colored glows anchored near corners/edges
+  glow: ({ rng, count, hue, hueShift, chroma }) =>
+    Array.from({ length: clamp(count, 2, 4) }, () => {
+      const x = rng() < 0.5 ? rng() * 25 : 75 + rng() * 25
+      const y = rng() < 0.5 ? rng() * 25 : 75 + rng() * 25
+      const w = 50 + rng() * 30
+      const h = 60 + rng() * 30
+      const l = 0.55 + rng() * 0.3
+      const offset = (rng() * 2 - 1) * Math.max(hueShift, 20) * 1.4
+      const alpha = 0.35 + rng() * 0.25
+      const color = `oklch(${n(l)} ${n(chroma * 1.2)} ${n(hue + offset)} / ${n(alpha)})`
+      return `radial-gradient(${n(w)}% ${n(h)}% at ${n(x)}% ${n(y)}%, ${color}, transparent 65%)`
+    }),
+
+  // Hard-edged circles
+  discs: ({ rng, count, scale, softness }) => {
+    const soft = 0.2 + softness * 14
+    return Array.from({ length: count }, () => {
+      const x = rng() * 100
+      const y = rng() * 100
+      const r = (8 + rng() * 24) * scale
+      const color = rng() > 0.45 ? LIGHT : DARK
+      return `radial-gradient(circle at ${n(x)}% ${n(y)}%, ${color} 0 ${n(r)}%, transparent ${n(r + soft)}%)`
+    })
+  },
+
+  // Diagonal stripes
+  beams: ({ rng, count, scale, softness, angle }) => {
+    const feather = softness * 10
+    return Array.from({ length: count }, () => {
+      const start = rng() * 75
+      const end = start + (6 + rng() * 22) * scale
+      const a = angle + 20 + (rng() * 2 - 1) * 8
+      const color = rng() > 0.4 ? LIGHT : DARK
+      return `linear-gradient(${n(a)}deg, transparent ${n(start - feather)}%, ${color} ${n(start)}% ${n(end)}%, transparent ${n(end + feather)}%)`
+    })
+  },
+
+  // Concentric rings sharing one center
+  rings: ({ rng, count, scale, softness }) => {
+    const cx = 20 + rng() * 60
+    const cy = 20 + rng() * 60
+    const feather = softness * 4
+    return Array.from({ length: count }, (_, i) => {
+      const r = (8 + (i / Math.max(count, 1)) * 60 + rng() * 6) * scale
+      const t = (1.5 + rng() * 5) * scale
+      const color = rng() > 0.4 ? LIGHT : DARK
+      return `radial-gradient(circle at ${n(cx)}% ${n(cy)}%, transparent ${n(r - feather)}%, ${color} ${n(r)}% ${n(r + t)}%, transparent ${n(r + t + feather)}%)`
+    })
+  },
+
+  // Diagonal fold tinting one side
+  wedge: ({ rng, count, softness, angle }) => {
+    const feather = softness * 12
+    return Array.from({ length: clamp(count, 1, 3) }, () => {
+      const p = 25 + rng() * 55
+      const a = angle + (rng() * 2 - 1) * 25
+      const color = rng() > 0.5 ? LIGHT : DARK
+      return `linear-gradient(${n(a)}deg, transparent ${n(p - feather)}%, ${color} ${n(p + feather)}%)`
+    })
+  },
 }
 
-const GRAIN_URL =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
-
-/* ---------- Component logic ---------- */
+/* ---------- Component logic (runs at build/render time, ships no JS) ---------- */
 
 const {
   variant = "discs",
@@ -175,61 +143,38 @@ const {
   hueShift = 25,
   chroma = 0.15,
   lightness = 0,
-  angle,
   count = 4,
   scale = 1,
-  intensity = 1,
   softness = 0,
-  grain = 0,
-  position = "absolute",
-  class: className,
-  style: extraStyle,
-  ...rest
 } = Astro.props
 
-const rng = mulberry32(hashSeed(seed))
-const baseAngle = angle ?? 120 + rng() * 50
+const angle = 120 + mulberry32(hashSeed(seed))() * 50
 const variants = Array.isArray(variant) ? variant : [variant]
 
 const shapes = variants.flatMap((v) =>
   BUILDERS[v]({
-    rng,
+    // Per-variant RNG: reordering variants doesn't change each one's look
+    rng: mulberry32(hashSeed(`${seed}:${v}`)),
     count,
     scale,
     softness: clamp(softness, 0, 1),
-    angle: baseAngle,
+    angle,
+    hue,
     hueShift,
     chroma,
   }),
 )
 
-const base = `linear-gradient(${n(baseAngle)}deg, oklch(calc(var(--wp-l-base) + var(--wp-l-offset)) var(--wp-chroma) var(--wp-hue)), oklch(calc(var(--wp-l-deep) + var(--wp-l-offset)) var(--wp-chroma) calc(var(--wp-hue) + var(--wp-shift))))`
+const lBase = n(clamp(L_BASE + lightness, 0, 1))
+const lDeep = n(clamp(L_DEEP + lightness, 0, 1))
+const base = `linear-gradient(${n(angle)}deg, oklch(${lBase} ${chroma} ${hue}), oklch(${lDeep} ${chroma} ${hue + hueShift}))`
 
-const backgroundImage = [...shapes, base].join(", ")
-
-const style = [
-  `--wp-hue:${hue}`,
-  `--wp-shift:${hueShift}`,
-  `--wp-chroma:${chroma}`,
-  `--wp-l-offset:${lightness}`,
-  `--wp-intensity:${intensity}`,
-  `background-color:oklch(var(--wp-l-deep) 0.12 var(--wp-hue))`,
-  `background-image:${backgroundImage}`,
-  extraStyle,
-]
-  .filter(Boolean)
-  .join(";")
-
-const grainStyle = `background-image:${GRAIN_URL};opacity:${clamp(grain, 0, 1)}`
+const style = `background-color:oklch(${lDeep} ${n(chroma * 0.8)} ${hue});background-image:${[...shapes, base].join(", ")}`
 ---
 
 <div
   aria-hidden="true"
-  data-position={position}
-  class:list={["wallpaper", className]}
+  class="pointer-events-none fixed inset-0 -z-10"
   style={style}
-  {...rest}
 >
-  {grain > 0 && <div class="wallpaper-grain" style={grainStyle} />}
-  <slot />
 </div>

@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "./wallpaper.css";
 
 /* ---------- Theme tokens ---------- */
 
@@ -8,8 +7,6 @@
 
   --background: #000;
   --foreground: #fff;
-  --error: #ff2424;
-  --success: #39ee15;
 
   /* Accent colors */
   --green: #008a00;
@@ -45,13 +42,23 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-error: var(--error);
-  --color-success: var(--success);
 
   --color-green: var(--green);
   --color-blue: var(--blue);
   --color-red: var(--red);
   --color-orange: var(--orange);
+  --color-lime: var(--lime);
+  --color-teal: var(--teal);
+  --color-cyan: var(--cyan);
+  --color-indigo: var(--indigo);
+  --color-purple: var(--purple);
+  --color-magenta: var(--magenta);
+  --color-pink: var(--pink);
+  --color-crimson: var(--crimson);
+  --color-amber: var(--amber);
+  --color-brown: var(--brown);
+  --color-steel: var(--steel);
+  --color-grey: var(--grey);
 }
 
 /* ---------- Base ---------- */

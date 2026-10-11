@@ -9,11 +9,13 @@ const square = "aspect-square overflow-hidden"
 // Shared by every solid color; reads the accent from --card.
 const solid =
   "bg-linear-to-r from-[color-mix(in_oklab,var(--card),black_15%)] to-(color:--card) border-[color-mix(in_oklab,var(--card),white_10%)] text-white"
-const solidHover = "hover:brightness-90 transition"
+const solidHover =
+  "hover:brightness-90 transition focus-visible:brightness-130 focus-visible:outline-none"
 
 const neutral = {
   idle: "border-foreground/15 bg-foreground/5",
-  hover: "hover:bg-foreground/10 transition",
+  hover:
+    "hover:bg-foreground/10 transition focus-visible:bg-foreground/15 focus-visible:outline-none",
 }
 
 // Each accent only sets --card. To add a color, define --name in CSS and add a line here.
@@ -72,6 +74,7 @@ const attrs = href ? { href, ...rest } : rest
 ---
 
 <Tag
+
   class:list={[
     base,
     isNeutral ? neutral.idle : [solid, accents[color]],
