@@ -1,11 +1,10 @@
 ---
-import Page from "../layouts/Page.astro";
 import { projects } from "../data/projects";
 import type { Project } from "../data/projects";
-import ChevronLeft from "../assets/icons/chevron-left.svg"
 import Card from "../components/Card.astro";
 import Warning from "../assets/icons/warning.svg"
 import Button from "../components/Button.astro";
+import ChildPage from "../layouts/ChildPage.astro";
 
 export function getStaticPaths() {
   return projects.map((item) => ({
@@ -21,31 +20,18 @@ interface Props {
 const { item } = Astro.props;
 ---
 
-<Page>
-  <div class="w-full max-w-2xl space-y-16 p-4 md:py-16">
-    <div class="mx-auto h-full flex flex-col gap-6">
-      <Button 
-        href="/#projects" 
-        variant="ghost"
-        class="w-fit"
-      >
-        <ChevronLeft />
-        Back
-      </Button>
-
-      <div class="grid grid-cols-3">
-        <Card 
-          class="col-span-3 aspect-2/1! md:aspect-3/1!"
-          href={item.appUrl}
-          icon={Warning}
-          label={item.title}
-          color={item.color}
-        />
-      </div>
-      <p class="text-foreground/60">{item.description}</p>
-      <Button class="justify-center">
-        Get Started
-      </Button>
-    </div> 
+<ChildPage>
+  <div class="grid grid-cols-3">
+    <Card 
+      class="col-span-3 aspect-2/1! md:aspect-3/1!"
+      href={item.appUrl}
+      icon={Warning}
+      label={item.title}
+      color={item.color}
+    />
   </div>
-</Page>
+  <p class="text-foreground/60">{item.description}</p>
+  <Button class="justify-center">
+    Get Started
+  </Button>
+</ChildPage>

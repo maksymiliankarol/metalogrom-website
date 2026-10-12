@@ -1,0 +1,21 @@
+---
+import Button from "../components/Button.astro";
+import Page from "../layouts/Page.astro";
+import ChevronLeft from "../assets/icons/chevron-left.svg"
+---
+
+<Page>
+  <div class="w-full max-w-2xl space-y-6 p-4 md:py-12">
+    <div class="mx-auto h-full flex flex-col gap-6">
+      <Button 
+        variant="ghost"
+        class="w-fit"
+        href="/"
+      >
+        <ChevronLeft />
+        Back
+      </Button>
+      <slot />
+    </div>
+  </div>
+</Page>

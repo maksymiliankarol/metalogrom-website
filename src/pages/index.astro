@@ -3,7 +3,7 @@ import Page from "../layouts/Page.astro";
 import Card from "../components/Card.astro";
 import { projects } from "../data/projects";
 import { icons } from "../data/icons";
-import Icon from "../assets/icons/warning.svg"
+import Mail from "../assets/icons/mail.svg"
 import TileGrid from "../components/TileGrid.astro";
 ---
 
@@ -20,7 +20,7 @@ import TileGrid from "../components/TileGrid.astro";
         {projects.map((p) => (
           <Card href={`/${p.slug}`} icon={icons[p.icon]} label={p.title} color={p.color} />
         ))}
-        <Card class="col-span-2" href="/" label="Wide" icon={Icon} />
+        <Card class="col-span-2" href="/contact" label="Contact" icon={Mail} />
       </TileGrid>
     </section>
   </div>
