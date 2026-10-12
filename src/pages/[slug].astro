@@ -1,36 +1,36 @@
 ---
-import Page from "../../layouts/Page.astro";
-import { software } from "../../data/software";
-import type { Software } from "../../data/software";
-import ChevronLeft from "../../assets/icons/chevron-left.svg"
-import Card from "../../components/Card.astro";
-import Warning from "../../assets/icons/warning.svg"
-import Button from "../../components/Button.astro";
+import Page from "../layouts/Page.astro";
+import { projects } from "../data/projects";
+import type { Project } from "../data/projects";
+import ChevronLeft from "../assets/icons/chevron-left.svg"
+import Card from "../components/Card.astro";
+import Warning from "../assets/icons/warning.svg"
+import Button from "../components/Button.astro";
 
 export function getStaticPaths() {
-  return software.map((item) => ({
+  return projects.map((item) => ({
     params: { slug: item.slug },
     props: { item },
   }));
 }
 
 interface Props {
-  item: Software;
+  item: Project;
 }
 
 const { item } = Astro.props;
 ---
 
 <Page>
-  <div class="w-full max-w-xl space-y-16 p-4 md:py-16">
+  <div class="w-full max-w-2xl space-y-16 p-4 md:py-16">
     <div class="mx-auto h-full flex flex-col gap-6">
       <Button 
-        href="/#software" 
+        href="/#projects" 
         variant="ghost"
         class="w-fit"
       >
         <ChevronLeft />
-        All Software
+        Back
       </Button>
 
       <div class="grid grid-cols-3">
@@ -39,7 +39,7 @@ const { item } = Astro.props;
           href={item.appUrl}
           icon={Warning}
           label={item.title}
-          color="indigo"
+          color={item.color}
         />
       </div>
       <p class="text-foreground/60">{item.description}</p>

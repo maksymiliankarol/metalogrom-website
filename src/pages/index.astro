@@ -1,25 +1,27 @@
 ---
 import Page from "../layouts/Page.astro";
 import Card from "../components/Card.astro";
-import Warning from "../assets/icons/warning.svg"
+import { projects } from "../data/projects";
+import { icons } from "../data/icons";
+import Icon from "../assets/icons/warning.svg"
+import TileGrid from "../components/TileGrid.astro";
 ---
 
 <Page>
   <div class="w-full max-w-5xl space-y-16 p-4 py-12 md:py-24">
     <section class="space-y-8">
       <h1 class="text-4xl md:text-5xl lg:text-6xl">Metalogrom</h1>
-      <p class="text-lg">Metalogrom is a family of products and services built to help people get everyday work done and have fun.</p>
+      <p class="text-lg">
+        Metalogrom is a family of products and services built to help people get everyday work done and have fun.
+      </p>
     </section>
-    <section id="software" class="space-y-4">
-      <h2 class="text-foreground/60">Software</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-2">
-        <Card 
-          href="/software/procurements" 
-          icon={Warning} 
-          label="Procurements" 
-          color="indigo" 
-        />
-      </div>
+    <section id="projects" class="space-y-4">
+      <TileGrid>
+        {projects.map((p) => (
+          <Card href={`/${p.slug}`} icon={icons[p.icon]} label={p.title} color={p.color} />
+        ))}
+        <Card class="col-span-2" href="/" label="Wide" icon={Icon} />
+      </TileGrid>
     </section>
   </div>
 </Page>

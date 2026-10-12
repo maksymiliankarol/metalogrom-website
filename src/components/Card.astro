@@ -4,7 +4,7 @@ import type { HTMLAttributes } from "astro/types"
 type CardLayout = "icon-center"
 
 const base = "grid p-4 border"
-const square = "aspect-square overflow-hidden"
+const square = "overflow-hidden"
 
 // Shared by every solid color; reads the accent from --card.
 const solid =
@@ -38,7 +38,7 @@ const accents = {
   grey: "[--card:var(--grey)]",
 }
 
-type CardColor = "neutral" | keyof typeof accents
+export type CardColor = "neutral" | keyof typeof accents
 
 export interface Props extends Omit<HTMLAttributes<"div">, "color"> {
   icon: (props: HTMLAttributes<"svg">) => any
