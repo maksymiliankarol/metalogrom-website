@@ -1,7 +1,6 @@
 ---
 import type { ComponentProps } from "astro/types";
 import Layout from "./Layout.astro";
-import Wallpaper from "../components/Wallpaper.astro";
 
 // Accept exactly the same props as Layout (title, description, canonicalPath, ...)
 type Props = ComponentProps<typeof Layout>;
@@ -10,16 +9,9 @@ const props = Astro.props;
 ---
 
 <Layout {...props}>
-  <main class="relative isolate min-h-dvh w-full flex justify-center overflow-auto">
-    <Wallpaper
-      variant={["wedge", "beams"]}
-      hue={150}
-      lightness={-0.26}
-      chroma={0.06}
-      softness={0.5}
-      seed="f5"
-      count={4}
-    />
-    <slot />
-  </main>
+  <div class='flex h-dvh w-full flex-col'>
+    <main class='flex-1 min-h-0 overflow-y-auto p-4'>
+      <slot />
+    </main>
+  </div>
 </Layout>

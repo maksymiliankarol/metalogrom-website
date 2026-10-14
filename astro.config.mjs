@@ -10,9 +10,16 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Open Sans',
-      cssVariable: '--font-open-sans',
+      name: 'Outfit',
+      cssVariable: '--font-sans',
       weights: [400, 600],
+      subsets: ['latin'],
+      fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Momo Trust Display',
+      cssVariable: '--font-heading',
       subsets: ['latin'],
       fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
     }

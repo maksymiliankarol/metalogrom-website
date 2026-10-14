@@ -1,75 +1,69 @@
 @import "tailwindcss";
 
-/* ---------- Theme tokens ---------- */
-
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --background: #000;
-  --foreground: #fff;
+  /* Neutrals: light to dark */
+  --white:    #ffffff;
+  --offwhite: #f3f0e7;
+  --pink:     #a49999;
+  --grey:     #8a8680;
+  --sage:     #70756c;
+  --offblack: #1c1d1b;
+  --black:    #000000;
 
-  /* Accent colors */
-  --green: #008a00;
-  --lime: #6a8f00;
-  --teal: #008a87;
-  --cyan: #0b84b8;
-  --blue: #1e6fd0;
-  --indigo: #2f35c9;
-  --purple: #8b1fbf;
-  --magenta: #b8006b;
-  --pink: #d03f8c;
-  --crimson: #960a24;
-  --red: #c01100;
-  --orange: #d85a00;
-  --amber: #c77800;
-  --brown: #7a4a22;
-  --steel: #546a7d;
-  --grey: #5c5f66;
+  /* Accents: warm to cool */
+  --red:      #c9322b;
+  --gold:     #c89722;
+  --yellow:   #e8c11b;
+  --green:    #2f7a4a;
+  --blue:     #213a79;
+  --navy:     #212732;
 
-  /* Wallpaper */
-  --wp-hue: 255;
-  --wp-l-base: 0.36;
-  --wp-l-deep: 0.2;
-  --wp-c-scale: 1;
-  --wp-shape: oklch(1 0 0 / 0.05);
-  --wp-shade: oklch(0 0 0 / 0.25);
+  /* App states */
+  --error:    #d00000;
 }
-
-/* ---------- Tailwind theme ---------- */
 
 @theme inline {
-  --font-sans: var(--font-open-sans);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Semantic */
+  --color-background: var(--offwhite);
+  --color-foreground: var(--offblack);
 
-  --color-green: var(--green);
-  --color-blue: var(--blue);
-  --color-red: var(--red);
-  --color-orange: var(--orange);
-  --color-lime: var(--lime);
-  --color-teal: var(--teal);
-  --color-cyan: var(--cyan);
-  --color-indigo: var(--indigo);
-  --color-purple: var(--purple);
-  --color-magenta: var(--magenta);
-  --color-pink: var(--pink);
-  --color-crimson: var(--crimson);
-  --color-amber: var(--amber);
-  --color-brown: var(--brown);
-  --color-steel: var(--steel);
-  --color-grey: var(--grey);
+  /* Neutrals */
+  --color-white:      var(--white);
+  --color-offwhite:   var(--offwhite);
+  --color-pink:       var(--pink);
+  --color-grey:       var(--grey);
+  --color-sage:       var(--sage);
+  --color-offblack:   var(--offblack);
+  --color-black:      var(--black);
+
+  /* Accents */
+  --color-red:        var(--red);
+  --color-gold:       var(--gold);
+  --color-yellow:     var(--yellow);
+  --color-green:      var(--green);
+  --color-blue:       var(--blue);
+  --color-navy:       var(--navy);
+
+  /* States */
+  --color-error:      var(--error);
 }
-
-/* ---------- Base ---------- */
 
 @layer base {
   body {
+    font-size: large;
     @apply bg-background text-foreground;
   }
-}
 
-/* ---------- Media ---------- */
+  :focus-visible {
+    outline: 2px solid var(--black);
+    outline-offset: 2px;
+  }
+}
 
 @media (prefers-reduced-motion: no-preference) {
   html {

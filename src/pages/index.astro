@@ -1,27 +1,27 @@
 ---
 import Page from "../layouts/Page.astro";
 import Card from "../components/Card.astro";
-import { projects } from "../data/projects";
-import { icons } from "../data/icons";
-import Mail from "../assets/icons/mail.svg"
-import TileGrid from "../components/TileGrid.astro";
+import { apps } from "../data/apps";
+import Handshake from "../assets/icons/handshake.svg";
+import Mail from "../assets/icons/mail.svg";
+import Groups from "../assets/icons/groups.svg";
+
+const icons: Record<string, typeof Handshake> = {
+  deals: Handshake,
+  herds: Groups,
+};
 ---
 
 <Page>
-  <div class="w-full max-w-5xl space-y-16 p-4 py-12 md:py-24">
-    <section class="space-y-8">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl">Metalogrom</h1>
-      <p class="text-lg">
-        Metalogrom is a family of products and services built to help people get everyday work done and have fun.
-      </p>
-    </section>
-    <section id="projects" class="space-y-4">
-      <TileGrid>
-        {projects.map((p) => (
-          <Card href={`/${p.slug}`} icon={icons[p.icon]} label={p.title} color={p.color} />
-        ))}
-        <Card class="col-span-2" href="/contact" label="Contact" icon={Mail} />
-      </TileGrid>
-    </section>
+  <div class="w-full max-w-3xl mx-auto py-12 space-y-8">
+    <h1 class="font-heading text-2xl sm:text-3xl md:text-4xl">
+      Metalogrom is a family of products and services built to help people get everyday work done and have fun.
+    </h1>
+    <div class="grid grid-cols-12 gap-4">
+      {apps.map(({ slug, title, color }) => (
+        <Card href={`/${slug}`} icon={icons[slug]} text={title} color={color} />
+      ))}
+      <Card href="/contact" icon={Mail} text="Contact" color="offblack" />
+    </div>
   </div>
 </Page>

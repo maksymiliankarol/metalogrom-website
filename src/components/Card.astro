@@ -1,89 +1,27 @@
 ---
-import type { HTMLAttributes } from "astro/types"
+import type { SvgComponent } from "astro/types";
+import { textOn, type AppColor } from "../data/colors";
 
-type CardLayout = "icon-center"
-
-const base = "grid p-4 border"
-const square = "overflow-hidden"
-
-// Shared by every solid color; reads the accent from --card.
-const solid =
-  "bg-linear-to-r from-[color-mix(in_oklab,var(--card),black_15%)] to-(color:--card) border-[color-mix(in_oklab,var(--card),white_10%)] text-white"
-const solidHover =
-  "hover:brightness-90 transition focus-visible:brightness-130 focus-visible:outline-none"
-
-const neutral = {
-  idle: "border-foreground/15 bg-foreground/5",
-  hover:
-    "hover:bg-foreground/10 transition focus-visible:bg-foreground/15 focus-visible:outline-none",
+interface Props {
+  href?: string;
+  icon?: SvgComponent;
+  text?: string;
+  color?: AppColor;
+  class?: string;
 }
 
-// Each accent only sets --card. To add a color, define --name in CSS and add a line here.
-const accents = {
-  green: "[--card:var(--green)]",
-  blue: "[--card:var(--blue)]",
-  red: "[--card:var(--red)]",
-  orange: "[--card:var(--orange)]",
-  lime: "[--card:var(--lime)]",
-  teal: "[--card:var(--teal)]",
-  cyan: "[--card:var(--cyan)]",
-  indigo: "[--card:var(--indigo)]",
-  purple: "[--card:var(--purple)]",
-  magenta: "[--card:var(--magenta)]",
-  pink: "[--card:var(--pink)]",
-  crimson: "[--card:var(--crimson)]",
-  amber: "[--card:var(--amber)]",
-  brown: "[--card:var(--brown)]",
-  steel: "[--card:var(--steel)]",
-  grey: "[--card:var(--grey)]",
-}
-
-export type CardColor = "neutral" | keyof typeof accents
-
-export interface Props extends Omit<HTMLAttributes<"div">, "color"> {
-  icon: (props: HTMLAttributes<"svg">) => any
-  label: string
-  layout?: CardLayout
-  color?: CardColor
-  href?: string
-  auto?: boolean
-}
-
-// Both elements share one grid cell and are positioned inside it.
-const layouts: Record<CardLayout, { icon: string; label: string }> = {
-  "icon-center": {
-    icon: "col-start-1 row-start-1 place-self-center size-12",
-    label: "col-start-1 row-start-1 self-end justify-self-start",
-  },
-}
-
-const {
-  icon: Icon,
-  label,
-  layout = "icon-center",
-  color = "neutral",
-  href,
-  auto = false,
-  class: className,
-  ...rest
-} = Astro.props
-
-const isNeutral = color === "neutral"
-const Tag = href ? "a" : "div"
-const attrs = href ? { href, ...rest } : rest
+const { href, icon: Icon, text, color = "offblack", class: className } = Astro.props;
 ---
 
-<Tag
-
+<a
+  href={href}
+  style={`background-color: var(--${color})`}
   class:list={[
-    base,
-    isNeutral ? neutral.idle : [solid, accents[color]],
-    !auto && square,
-    href && (isNeutral ? neutral.hover : solidHover),
+    "col-span-6 sm:col-span-4 md:col-span-3 aspect-square flex flex-col gap-2 items-center justify-center border-2 border-black cursor-pointer hover:brightness-75",
+    textOn(color),
     className,
   ]}
-  {...attrs}
 >
-  <Icon class={layouts[layout].icon} />
-  <span class={layouts[layout].label}>{label}</span>
-</Tag>
+  {Icon && <Icon class="size-12 md:size-14" />}
+  {text && <span class="text-xl md:text-2xl">{text}</span>}
+</a>

@@ -1,37 +1,43 @@
 ---
-import { projects } from "../data/projects";
-import type { Project } from "../data/projects";
-import Card from "../components/Card.astro";
-import Warning from "../assets/icons/warning.svg"
-import Button from "../components/Button.astro";
-import ChildPage from "../layouts/ChildPage.astro";
+import { apps } from "../data/apps";
+import type { App } from "../data/apps";
+import { textOn } from "../data/colors";
+import Page from "../layouts/Page.astro";
 
 export function getStaticPaths() {
-  return projects.map((item) => ({
+  return apps.map((item) => ({
     params: { slug: item.slug },
     props: { item },
   }));
 }
 
 interface Props {
-  item: Project;
+  item: App;
 }
 
 const { item } = Astro.props;
 ---
 
-<ChildPage>
-  <div class="grid grid-cols-3">
-    <Card 
-      class="col-span-3 aspect-2/1! md:aspect-3/1!"
+<Page>
+  <div
+    style={`background-color: var(--${item.color})`}
+    class:list={[
+      "w-full max-w-2xl mx-auto my-12 p-6 border-2 border-black",
+      textOn(item.color),
+    ]}
+  >
+    <a href="/" class="underline cursor-pointer hover:decoration-2">
+      Back
+    </a>
+    <h1 class="font-heading text-4xl pt-6">
+      {item.title}
+    </h1>
+    <p class="pb-10 pt-6">{item.description}</p>
+    <a
       href={item.appUrl}
-      icon={Warning}
-      label={item.title}
-      color={item.color}
-    />
+      class="inline-flex items-center justify-center bg-white text-black border-2 border-black py-2 px-4 text-xl cursor-pointer hover:brightness-75"
+    >
+      Get started
+    </a>
   </div>
-  <p class="text-foreground/60">{item.description}</p>
-  <Button class="justify-center">
-    Get Started
-  </Button>
-</ChildPage>
+</Page>
