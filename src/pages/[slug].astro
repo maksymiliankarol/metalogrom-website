@@ -3,6 +3,7 @@ import { apps } from "../data/apps";
 import type { App } from "../data/apps";
 import { textOn } from "../data/colors";
 import Page from "../layouts/Page.astro";
+import ArrowBack from "../assets/icons/arrow-back.svg";
 
 export function getStaticPaths() {
   return apps.map((item) => ({
@@ -26,13 +27,14 @@ const { item } = Astro.props;
       textOn(item.color),
     ]}
   >
-    <a href="/" class="underline cursor-pointer hover:decoration-2">
-      Back
+    <a href="/" class="flex flex-row items-center gap-2 underline cursor-pointer hover:decoration-2">
+      <ArrowBack />
+      <span>Back</span>
     </a>
-    <h1 class="font-heading text-4xl pt-6">
+    <h1 class="font-heading text-4xl pt-8">
       {item.title}
     </h1>
-    <p class="pb-10 pt-6">{item.description}</p>
+    <p class="pb-10 pt-4">{item.description}</p>
     <a
       href={item.appUrl}
       class="inline-flex items-center justify-center bg-white text-black border-2 border-black py-2 px-4 text-xl cursor-pointer hover:brightness-75"

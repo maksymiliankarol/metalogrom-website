@@ -1,18 +1,16 @@
 ---
 import ChildPage from "../layouts/ChildPage.astro";
+import ArrowBack from "../assets/icons/arrow-back.svg";
 ---
 
 <ChildPage>
-  <h1 class="text-3xl md:text-4xl">Contact</h1>
-  <p class="text-foreground/60">
-    Questions, feedback, or ideas? We'd love to hear from you.
-  </p>
-  <p class="text-foreground/60">
-    Write to us at
-    <a
-      href="mailto:help@metalogrom.com"
-      class="underline hover:decoration-2 text-foreground px-2"
-    >help@metalogrom.com</a>
-    and we'll get back to you as soon as we can.
-  </p>
+  <div class="w-full max-w-2xl mx-auto my-12 p-6 border-2 border-black">
+    <a href="/" class="flex flex-row items-center gap-2 underline cursor-pointer hover:decoration-2">
+      <ArrowBack />
+      <span>Back</span>
+    </a>
+    <p class="pt-4">
+      Write us: <a class="cursor-pointer hover:decoration-2 underline" href="mailto:help@metalogrom.com">help@metalogrom.com</a>
+    </p>
+  </div>
 </ChildPage>

@@ -10,7 +10,7 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Outfit',
+      name: 'Lexend',
       cssVariable: '--font-sans',
       weights: [400, 600],
       subsets: ['latin'],
