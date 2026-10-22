@@ -12,7 +12,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: 'Lexend',
       cssVariable: '--font-sans',
-      weights: [400, 600],
+      weights: [400],
       subsets: ['latin'],
       fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
     },

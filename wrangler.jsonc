@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "metalogrom-website",
+  "compatibility_date": "2026-10-16",
+  "routes": [{ "pattern": "metalogrom.com", "custom_domain": true }],
+  "assets": {
+    "directory": "./dist",
+  }
+}

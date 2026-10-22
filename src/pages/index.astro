@@ -1,27 +1,21 @@
 ---
 import Page from "../layouts/Page.astro";
-import Card from "../components/Card.astro";
+import Tile from "../components/Tile.astro";
 import { apps } from "../data/apps";
-import Handshake from "../assets/icons/handshake.svg";
-import Mail from "../assets/icons/mail.svg";
-import Groups from "../assets/icons/groups.svg";
-
-const icons: Record<string, typeof Handshake> = {
-  deals: Handshake,
-  herds: Groups,
-};
 ---
 
 <Page>
-  <div class="w-full max-w-3xl mx-auto py-12 space-y-8">
+  <div class="w-full max-w-3xl mx-auto space-y-8 py-8 md:py-12">
     <h1 class="font-heading text-2xl sm:text-3xl md:text-4xl">
       Metalogrom is a family of products and services built to help people get everyday work done and have fun.
     </h1>
-    <div class="grid grid-cols-12 gap-4">
-      {apps.map(({ slug, title, color }) => (
-        <Card href={`/${slug}`} icon={icons[slug]} text={title} color={color} />
-      ))}
-      <Card href="/contact" icon={Mail} text="Contact" color="offblack" />
+    <div class="border-2 border-black overflow-hidden">
+      <section class="grid grid-cols-12 -mr-0.5 -mb-0.5">
+        {apps.map(({ slug, title, color }) => (
+          <Tile title={title} href={`/${slug}`} color={color} />
+        ))}
+        <Tile title="Contact" href="/contact" color="offblack" />
+      </section>
     </div>
   </div>
 </Page>
