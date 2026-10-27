@@ -3,7 +3,7 @@ import { apps } from "../data/apps";
 import type { App } from "../data/apps";
 import Page from "../layouts/Page.astro";
 import ArrowBack from "../assets/icons/arrow-back.svg";
-import { tileColors } from "../utils/tileColors";
+import { buttonColors } from "../utils/buttonColor";
 
 export function getStaticPaths() {
   return apps.map((item) => ({
@@ -17,27 +17,22 @@ interface Props {
 }
 
 const { item } = Astro.props;
-const color = item.color ?? "none";
+const colorClasses = buttonColors[item.color ?? "none"];
 ---
 
-<Page>
-  <div
-    class:list={[
-      "w-full max-w-lg mx-auto md:p-6 p-4 min-h-full flex flex-col border-2 border-black",
-      tileColors[color],
-    ]}
-  >
-    <a href="/" class="inline-flex items-center gap-2 underline hover:decoration-2 self-start">
+<Page title={item.title} description={item.description}>
+  <div class="w-full max-w-lg mx-auto flex flex-col gap-4">
+    <a href="/" class="inline-flex items-center gap-2 underline hover:decoration-2 self-start md:pt-8">
       <ArrowBack />
       <span>Back</span>
     </a>
-    <h1 class="font-heading text-3xl sm:text-4xl pt-8">{item.title}</h1>
-    <p class="text-lg pt-4 pb-10">{item.description}</p>
+    <h1 class="text-4xl md:text-6xl md:pt-8 pt-4">{item.title}</h1>
+    <p class="pb-8 pt-4">{item.description}</p>
     <a
       href={item.url}
-      class="mt-auto self-start inline-flex items-center justify-center bg-white text-black border-2 border-black py-2 px-4 text-xl hover:brightness-75"
+      class:list={[colorClasses, "px-4 py-2 border-2 border-black w-fit cursor-pointer hover:brightness-75"]}
     >
-      Get started
+      Get Started
     </a>
   </div>
 </Page>

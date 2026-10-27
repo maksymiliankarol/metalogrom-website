@@ -1,4 +1,4 @@
-export const tileColors = {
+export const buttonColors = {
   blue: "bg-blue text-white",
   green: "bg-green text-white",
   red: "bg-red text-white",
@@ -7,4 +7,4 @@ export const tileColors = {
   none: "",
 } as const;
 
-export type TileColor = keyof typeof tileColors;
+export type TileColor = keyof typeof buttonColors;

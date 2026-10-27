@@ -1,7 +1,5 @@
 ---
 import Page from "../layouts/Page.astro";
-import Tile from "../components/Tile.astro";
-import { apps } from "../data/apps";
 ---
 
 <Page>
@@ -9,13 +7,16 @@ import { apps } from "../data/apps";
     <h1 class="font-heading text-2xl sm:text-3xl md:text-4xl">
       Metalogrom is a family of products and services built to help people get everyday work done and have fun.
     </h1>
-    <div class="border-2 border-black overflow-hidden">
-      <section class="grid grid-cols-12 -mr-0.5 -mb-0.5">
-        {apps.map(({ slug, title, color }) => (
-          <Tile title={title} href={`/${slug}`} color={color} />
-        ))}
-        <Tile title="Contact" href="/contact" color="offblack" />
-      </section>
+    <div class="grid grid-cols-2 md:grid-cols-4 auto-rows-32 gap-4 grid-flow-dense">
+      <a href="/deals" class="col-span-2 md:row-span-2 text-2xl md:text-5xl bg-yellow text-offblack flex items-center justify-center border-2 border-black hover:brightness-75">
+        Deals
+      </a>
+      <a href="/herds" class="col-span-2 text-2xl md:text-3xl bg-red text-white border-2 border-black flex items-center justify-center hover:brightness-75">
+        Herds
+      </a>
+      <a href="/contact" class="bg-white text-xl border-2 border-black flex items-center justify-center hover:brightness-75">
+        Contact
+      </a>
     </div>
   </div>
 </Page>

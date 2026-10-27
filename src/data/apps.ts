@@ -1,4 +1,4 @@
-import type { TileColor } from "../utils/tileColors";
+import type { TileColor } from "../utils/buttonColor";
 
 export interface App {
   slug: string;
@@ -12,15 +12,15 @@ export const apps: App[] = [
   {
     slug: "deals",
     title: "Deals",
-    description: "Deals matches companies that need something with companies that offer it. Describe what you want to buy or sell in your own words, and see who's a fit.",
+    description: "Matches people and organizations that need something with those who offer it. Describe what you want to buy or sell in your own words, and see who's a fit.",
     url: "https://deals.metalogrom.com",
-    color: "blue",
+    color: "yellow",
   },
   {
     slug: "herds",
     title: "Herds",
-    description: "Herds are people in your city.",
+    description: "A shared chat for your city, split into rooms by topic. Talk with the people who live where you do. No account needed.",
     url: "https://herds.metalogrom.com",
-    color: "green"
+    color: "red"
   },
 ];

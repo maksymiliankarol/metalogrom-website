@@ -17,10 +17,11 @@ pnpm-debug.log*
 .env
 .env.production
 
+# todo
+TODO.md
+
 # macOS-specific files
 .DS_Store
 
 # jetbrains setting folder
 .idea/
-DEV.md
-TODO.md
