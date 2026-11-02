@@ -1,0 +1,29 @@
+---
+// src/pages/[lang]/index.astro
+import Logo from "../../components/Logo.astro";
+import { getDescription, software } from "../../data/software";
+import { getLang, getLangPaths, localePath, useTranslations } from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return getLangPaths();
+}
+
+const lang = getLang(Astro.params.lang);
+const t = useTranslations(lang);
+---
+
+<Layout {lang}>
+  <Logo />
+  <p class="intro">{t('home.intro')}</p>
+  <section class="segment">
+    <label>{t('home.software')}</label>
+    <ul>
+      {software.map((item) => (
+        <li>
+          <a href={localePath(`/${item.slug}`, lang)}>{item.name}</a> - <span>{getDescription(item, lang)}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

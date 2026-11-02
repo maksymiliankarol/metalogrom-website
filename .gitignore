@@ -4,6 +4,12 @@ dist/
 # generated types
 .astro/
 
+# ide
+.vscode
+
+# wrangler
+.wrangler
+
 # dependencies
 node_modules/
 

@@ -1,11 +1,15 @@
 ---
 import '../styles/index.css';
-import { Font } from 'astro:assets';
 import SEO from '../components/SEO.astro';
 import JsonLd from '../components/JsonLd.astro';
-import { siteGraph } from '../data/schema';
+import { SITE_NAME } from '../data/site';
+import { getPageGraph } from '../data/schema';
+import { defaultLang } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+import { normalizePath, useTranslations } from '../i18n/utils';
 
 interface Props {
+  lang?: Lang;
   title?: string;
   description?: string;
   canonicalPath?: string;
@@ -15,25 +19,28 @@ interface Props {
   type?: 'website' | 'article';
 }
 
-const { title, description, canonicalPath, noindex, image, imageAlt, type } = Astro.props;
+const { lang = defaultLang, title, description, canonicalPath, noindex, image, imageAlt, type } = Astro.props;
+
+const t = useTranslations(lang);
+const metaDescription = description ?? t('site.description');
+const pageUrl = new URL(normalizePath(canonicalPath ?? Astro.url.pathname), Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <Font cssVariable="--font-sans" preload />
-    <Font cssVariable="--font-heading" preload />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#f3f0e7" />
+    <meta name="theme-color" content="#e5e5e5" />
     <meta name="generator" content={Astro.generator} />
-    <SEO {title} {description} {canonicalPath} {noindex} {image} {imageAlt} {type} />    <JsonLd data={siteGraph} />
+    <SEO {lang} {title} description={metaDescription} {canonicalPath} {noindex} {image} {imageAlt} {type} />
+    <JsonLd data={getPageGraph({ lang, url: pageUrl, name: title ?? SITE_NAME, description: metaDescription })} />
   </head>
-  <body>
+  <body class="layout">
     <slot />
   </body>
 </html>

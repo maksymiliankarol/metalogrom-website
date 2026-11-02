@@ -1,37 +1,25 @@
 // @ts-check
-import { defineConfig, fontProviders } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'astro/config';
 import sitemap from "@astrojs/sitemap";
+import { defaultLang, languages } from './src/i18n/ui';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://metalogrom.com',
   trailingSlash: 'never',
-  fonts: [
-    {
-      provider: fontProviders.google(),
-      name: 'Lexend',
-      cssVariable: '--font-sans',
-      weights: [400],
-      subsets: ['latin'],
-      fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'Momo Trust Display',
-      cssVariable: '--font-heading',
-      subsets: ['latin'],
-      fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
-    }
-  ],
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: []
   },
-  integrations: [
+    integrations: [
     sitemap({
-      filter: (page) =>
-        !page.includes('/404'),
+      filter: (page) => !page.includes('/404'),
+      i18n: {
+        defaultLocale: defaultLang,
+        locales: Object.fromEntries(
+          Object.entries(languages).map(([code, l]) => [code, l.hreflang])
+        ),
+      },
     }),
   ],
   build: { format: 'file' }

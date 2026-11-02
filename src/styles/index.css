@@ -1,72 +1,251 @@
-@import "tailwindcss";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* 
+  This is my 
+*/
 
 :root {
-  color-scheme: light;
+  --white: #fff;
+  --black: #000;
 
-  /* Neutrals: light to dark */
-  --white:    #ffffff;
-  --offwhite: #f3f0e7;
-  --pink:     #a49999;
-  --grey:     #8a8680;
-  --sage:     #70756c;
-  --offblack: #1c1d1b;
-  --black:    #000000;
+  --grey-1: #f4f4f4;
+  --grey-2: #e5e5e5;
+  --grey-3: #d1d1d1;
+  --grey-4: #bbbbbb;
+  --grey-5: #a3a3a3;
+  --grey-6: #898989;
+  --grey-7: #6f6f6f;
+  --grey-8: #575757;
+  --grey-9: #404040;
+  --grey-10: #2c2c2c;
 
-  /* Accents: warm to cool */
-  --red:      #c9322b;
-  --gold:     #c89722;
-  --yellow:   #e8c11b;
-  --green:    #2f7a4a;
-  --blue:     #213a79;
-  --navy:     #212732;
+  --link: #003f9a;
+  --link-dark: #00265c;
+  --success: #00804f;
+  --success-dark: #014229;
+  --warning: #f7a700;
+  --warning-dark: #b98004;
+  --destructive: #e0161f;
+  --destructive-dark: #a31219;
 
-  /* App states */
-  --error:    #d00000;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-@theme inline {
-  --font-sans: var(--font-sans);
-  --font-heading: var(--font-heading);
+/* HTML tags */
 
-  /* Semantic */
-  --color-background: var(--offwhite);
-  --color-foreground: var(--offblack);
-
-  /* Neutrals */
-  --color-white:      var(--white);
-  --color-offwhite:   var(--offwhite);
-  --color-pink:       var(--pink);
-  --color-grey:       var(--grey);
-  --color-sage:       var(--sage);
-  --color-offblack:   var(--offblack);
-  --color-black:      var(--black);
-
-  /* Accents */
-  --color-red:        var(--red);
-  --color-gold:       var(--gold);
-  --color-yellow:     var(--yellow);
-  --color-green:      var(--green);
-  --color-blue:       var(--blue);
-  --color-navy:       var(--navy);
-
-  /* States */
-  --color-error:      var(--error);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@layer base {
-  body {
-    font-size: large;
-    @apply bg-background text-foreground;
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--black);
-    outline-offset: 2px;
-  }
+body {
+  background: var(--grey-3);
+  color: var(--black);
+  font-family: var(--font-serif);
+  line-height: 1.5;
+  padding: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+a {
+  color: var(--link);
+}
+
+a:hover {
+  color: var(--link-dark);
+  text-decoration-thickness: 2px;
+}
+
+label {
+  font-weight: 600;
+}
+
+ul,
+ol {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+}
+
+ul {
+  list-style-type: square;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+li {
+  margin-bottom: 0.25rem;
+}
+
+li::marker {
+  color: var(--black);
+}
+
+/* nested lists */
+li > ul,
+li > ol {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+ul ul {
+  list-style-type: circle;
+}
+
+ul ul ul {
+  list-style-type: square;
+}
+
+ol ol {
+  list-style-type: lower-alpha;
+}
+
+ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* Custom styling */
+
+.layout {
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
+  background: var(--grey-2);
+}
+
+.intro {
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--grey-6);
+}
+
+.segment {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+
+.individual {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  gap: 0.5rem;
+  border-top: 1px solid var(--grey-5);
+}
+
+/* Branding */
+
+.logo-banner {
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  align-items: center;     /* vertical centering */
+  width: 100%;
+  padding-bottom: 3rem;
+  padding-top: 2rem;
+}
+
+.logo {
+  font-weight: 600;
+  line-height: 1;
+  padding-inline: 0.5rem;
+  cursor: default;
+}
+
+.logo-text {
+  --dot: 0.35rem;
+  --gap: 0.75rem;
+  position: relative;
+  display: inline-block;
+  font-size: 26px;
+}
+
+.logo-dot {
+  position: absolute;
+  width: var(--dot);
+  height: var(--dot);
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.logo-dot-top {
+  bottom: calc(100% + var(--gap));
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--warning);
+}
+
+.logo-dot-bottom {
+  top: calc(100% + var(--gap));
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--link);
+}
+
+.logo-dot-left {
+  right: calc(100% + var(--gap));
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--destructive);
+}
+
+.logo-dot-right {
+  left: calc(100% + var(--gap));
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--success);
 }
