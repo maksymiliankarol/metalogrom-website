@@ -1,7 +1,6 @@
 ---
-// src/pages/[lang]/index.astro
 import Logo from "../../components/Logo.astro";
-import { getDescription, software } from "../../data/software";
+import { software } from "../../content/software/list";
 import { getLang, getLangPaths, localePath, useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 
@@ -21,7 +20,7 @@ const t = useTranslations(lang);
     <ul>
       {software.map((item) => (
         <li>
-          <a href={localePath(`/${item.slug}`, lang)}>{item.name}</a> - <span>{getDescription(item, lang)}</span>
+          <a href={localePath(`/software/${item.slug}`, lang)}>{item.name}</a>
         </li>
       ))}
     </ul>

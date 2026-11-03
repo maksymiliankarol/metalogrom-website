@@ -15,7 +15,8 @@ const en = {
   'nav.back': 'Back',
   'nav.contact': 'Contact',
   'contact.write': 'Write us:',
-  'software.getStarted': 'Get Started',
+    'notFound.title': 'Page not found',
+  'notFound.text': "The page you're looking for doesn't exist.",
 } as const;
 
 export type UIKey = keyof typeof en;
@@ -31,7 +32,6 @@ export const ui: Record<Lang, Partial<Dict>> & { en: Dict } = {
     'nav.back': 'Wstecz',
     'nav.contact': 'Kontakt',
     'contact.write': 'Napisz do nas:',
-    'software.getStarted': 'Zacznij',
   },
 };
 

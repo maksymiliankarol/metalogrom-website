@@ -2,7 +2,6 @@ import { readFileSync, readdirSync } from 'node:fs';
 
 const HOST = 'metalogrom.com';
 const KEY = '751a87adf9b74b9fa798a6c85d97580f'
-if (!KEY) throw new Error('Set INDEXNOW_KEY to your key.');
 
 // URLs passed as arguments, or every URL from the built sitemaps
 let urls = process.argv.slice(2);

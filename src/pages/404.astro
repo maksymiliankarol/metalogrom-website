@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { defaultLang } from '../i18n/ui';
+import { localePath, useTranslations } from '../i18n/utils';
+
+const t = useTranslations(defaultLang);
+---
+
+<Layout title={t('notFound.title')} noindex>
+  <p><a href={localePath('/', defaultLang)}>{t('nav.back')}</a></p>
+  <section class="individual">
+    <h1>{t('notFound.title')}</h1>
+    <p>{t('notFound.text')}</p>
+  </section>
+</Layout>
