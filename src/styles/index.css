@@ -217,6 +217,10 @@ hr {
   border-top: 1px solid var(--grey-5);
 }
 
+.intro {
+  text-align: center;
+}
+
 /* Branding */
 
 .logo-banner {
