@@ -1,6 +1,7 @@
 ---
 import Logo from "../../components/Logo.astro";
-import { software } from "../../content/software/list";
+import { getDescription, software } from "../../content/software/list";
+import { languages, type Lang } from "../../i18n/ui";
 import { getLang, getLangPaths, localePath, useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 
@@ -10,19 +11,42 @@ export function getStaticPaths() {
 
 const lang = getLang(Astro.params.lang);
 const t = useTranslations(lang);
+const langs = Object.keys(languages) as Lang[];
 ---
 
 <Layout {lang}>
   <Logo />
   <p class="intro">{t('home.intro')}</p>
+  <hr />
   <section class="segment">
     <label>{t('home.software')}</label>
     <ul>
       {software.map((item) => (
         <li>
           <a href={localePath(`/software/${item.slug}`, lang)}>{item.name}</a>
+          {" - "}{getDescription(item, lang)}
         </li>
       ))}
     </ul>
+  </section>
+  <hr />
+  <section class="segment">
+    <label>{t('home.language')}</label>
+    <ul>
+      {langs.map((l) => (
+        <li>
+          {l === lang ? (
+            <strong aria-current="true">{languages[l].label}</strong>
+          ) : (
+            <a href={localePath("/", l)} hreflang={languages[l].hreflang}>{languages[l].label}</a>
+          )}
+        </li>
+      ))}
+    </ul>
+  </section>
+  <hr />
+  <section class="segment">
+    <label>{t('home.contact')}</label>
+    <p>{t('home.write')} <a href="mailto:help@metalogrom.com">help@metalogrom.com</a></p>
   </section>
 </Layout>

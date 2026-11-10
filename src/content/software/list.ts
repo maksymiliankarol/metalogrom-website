@@ -10,9 +10,17 @@ export const software: Software[] = [
   {
     slug: 'deals',
     name: 'Deals',
+    description: {
+      en: 'Post what you want to buy, or find buyers.',
+      pl: 'Napisz, czego szukasz, albo znajdź kupców.',
+    },
+  },
+  {
+    slug: 'herds',
+    name: 'Herds',
     description: { 
-      en: 'Something', 
-      pl: 'something' 
+      en: 'Chat with people in your city.', 
+      pl: 'Rozmawiaj z ludźmi z twojego miasta.' 
     },
   },
 ];

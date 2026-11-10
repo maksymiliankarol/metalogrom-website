@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../../layouts/Layout.astro';
+import { getLang, getLangPaths, localePath, useTranslations } from '../../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('articles');
+  const byId = new Map(entries.map((e) => [e.id, e]));
+  // "deals/my-title/en" -> "deals/my-title"
+  const pages = [...new Set(entries.map((e) => e.id.split('/').slice(0, 2).join('/')))];
+
+  for (const page of pages) {
+    if (!byId.has(`${page}/en`)) throw new Error(`Missing src/content/articles/${page}/en.md`);
+  }
+
+  return getLangPaths().flatMap(({ params }) => {
+    const lang = getLang(params.lang);
+    return pages.map((page) => {
+      const [slug, article] = page.split('/');
+      return {
+        params: { ...params, slug, article },
+        props: { entry: byId.get(`${page}/${lang}`) ?? byId.get(`${page}/en`)! },
+      };
+    });
+  });
+}
+
+const { entry } = Astro.props;
+const lang = getLang(Astro.params.lang);
+const t = useTranslations(lang);
+const { Content } = await render(entry);
+---
+
+<Layout {lang} title={entry.data.title} description={entry.data.description}>
+  <p><a href={localePath(`/software/${Astro.params.slug}`, lang)}>{t('nav.back')}</a></p>
+  <section class="individual">
+    <h1>{entry.data.title}</h1>
+    <Content />
+  </section>
+</Layout>

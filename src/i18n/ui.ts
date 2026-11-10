@@ -11,11 +11,12 @@ export const defaultLang: Lang = 'en';
 const en = {
   'site.description': SITE_DESCRIPTION,
   'home.intro': SITE_DESCRIPTION,
-  'home.software': "Software",
+  'home.software': 'Software',
+  'home.language': 'Language',
+  'home.contact': 'Contact',
+  'home.write': 'Write us:',
   'nav.back': 'Back',
-  'nav.contact': 'Contact',
-  'contact.write': 'Write us:',
-    'notFound.title': 'Page not found',
+  'notFound.title': 'Page not found',
   'notFound.text': "The page you're looking for doesn't exist.",
 } as const;
 
@@ -28,10 +29,13 @@ export const ui: Record<Lang, Partial<Dict>> & { en: Dict } = {
   pl: {
     'site.description': 'Metalogrom to ekosystem produktów i usług do codziennej pracy i zabawy.',
     'home.intro': 'Metalogrom to ekosystem produktów i usług do codziennej pracy i zabawy.',
-    'home.software': "Oprogramowanie",
+    'home.software': 'Oprogramowanie',
+    'home.language': 'Język',
+    'home.contact': 'Kontakt',
+    'home.write': 'Napisz do nas:',
     'nav.back': 'Wstecz',
-    'nav.contact': 'Kontakt',
-    'contact.write': 'Napisz do nas:',
+    'notFound.title': 'Nie znaleziono strony',
+    'notFound.text': 'Strona, której szukasz, nie istnieje.',
   },
 };
 

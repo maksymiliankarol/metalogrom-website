@@ -35,7 +35,7 @@ const pageUrl = new URL(normalizePath(canonicalPath ?? Astro.url.pathname), Astr
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#e5e5e5" />
+    <meta name="theme-color" content="#d1d1d1" />
     <meta name="generator" content={Astro.generator} />
     <SEO {lang} {title} description={metaDescription} {canonicalPath} {noindex} {image} {imageAlt} {type} />
     <JsonLd data={getPageGraph({ lang, url: pageUrl, name: title ?? SITE_NAME, description: metaDescription })} />
