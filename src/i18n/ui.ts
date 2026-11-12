@@ -27,8 +27,8 @@ type Dict = Record<UIKey, string>;
 export const ui: Record<Lang, Partial<Dict>> & { en: Dict } = {
   en,
   pl: {
-    'site.description': 'Metalogrom to kolekcja prostych i pomocnych programów.',
-    'home.intro': 'Metalogrom to kolekcja prostych i pomocnych programów.',
+    'site.description': 'Metalogrom to kolekcja prostych i pomocnych rzeczy.',
+    'home.intro': 'Metalogrom to kolekcja prostych i pomocnych rzeczy.',
     'home.software': 'Programy',
     'home.language': 'Język',
     'home.contact': 'Kontakt',
