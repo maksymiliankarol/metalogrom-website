@@ -1,17 +1,18 @@
 ---
-import Logo from "../../components/Logo.astro";
-import { getDescription, software } from "../../content/software/list";
-import { languages, type Lang } from "../../i18n/ui";
-import { getLang, getLangPaths, localePath, useTranslations } from "../../i18n/utils";
-import Layout from "../../layouts/Layout.astro";
+import Logo from './Logo.astro';
+import Layout from '../layouts/Layout.astro';
+import { getPages, listPages } from '../data/pages';
+import { languages } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+import { langs, localePath, useTranslations } from '../i18n/utils';
 
-export function getStaticPaths() {
-  return getLangPaths();
+interface Props {
+  lang: Lang;
 }
 
-const lang = getLang(Astro.params.lang);
+const { lang } = Astro.props;
 const t = useTranslations(lang);
-const langs = Object.keys(languages) as Lang[];
+const software = listPages(await getPages(), 'software', lang);
 ---
 
 <Layout {lang}>
@@ -23,8 +24,8 @@ const langs = Object.keys(languages) as Lang[];
     <ul>
       {software.map((item) => (
         <li>
-          <a href={localePath(`/software/${item.slug}`, lang)}>{item.name}</a>
-          {" - "}{getDescription(item, lang)}
+          <a href={localePath(`/${item.path}`, lang)}>{item.title}</a>
+          {" - "}{item.description}
         </li>
       ))}
     </ul>

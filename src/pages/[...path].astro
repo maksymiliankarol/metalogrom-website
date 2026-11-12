@@ -1,0 +1,48 @@
+---
+import { render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import { getPages, parentPath, pickEntry } from '../data/pages';
+import { defaultLang } from '../i18n/ui';
+import { langs, localePath, useTranslations } from '../i18n/utils';
+
+export async function getStaticPaths() {
+  const pages = await getPages();
+
+  return langs.flatMap((lang) =>
+    [...pages.keys()].map((path) => {
+      const entry = pickEntry(pages, path, lang)!;
+      const parent = parentPath(pages, path);
+      const parentEntry = parent ? pickEntry(pages, parent, lang) : undefined;
+
+      return {
+        // English has no prefix: "software/deals", Polish: "pl/software/deals"
+        params: { path: lang === defaultLang ? path : `${lang}/${path}` },
+        props: {
+          lang,
+          entry,
+          // "Deals: Terms" for children, plain "Deals" for top-level pages
+          title: parentEntry ? `${parentEntry.data.title}: ${entry.data.title}` : entry.data.title,
+          backHref: localePath(`/${parent}`, lang),
+        },
+      };
+    })
+  );
+}
+
+const { lang, entry, title, backHref } = Astro.props;
+const t = useTranslations(lang);
+const { Content } = await render(entry);
+---
+
+<Layout {lang} {title} description={entry.data.description}>
+  <p>
+    <a href={backHref}>
+      {t("nav.back")}
+    </a>
+  </p>
+  <section class="individual">
+    <h1>{entry.data.title}</h1>
+    <Content components={{ Button }} />
+  </section>
+</Layout>

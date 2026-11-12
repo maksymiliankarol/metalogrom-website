@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from "@astrojs/sitemap";
 import { defaultLang, languages } from './src/i18n/ui';
 
+import mdx from '@astrojs/mdx';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://metalogrom.com',
@@ -11,8 +13,7 @@ export default defineConfig({
   vite: {
     plugins: []
   },
-    integrations: [
-    sitemap({
+    integrations: [sitemap({
       filter: (page) => !page.includes('/404'),
       i18n: {
         defaultLocale: defaultLang,
@@ -20,7 +21,6 @@ export default defineConfig({
           Object.entries(languages).map(([code, l]) => [code, l.hreflang])
         ),
       },
-    }),
-  ],
+    }), mdx()],
   build: { format: 'file' }
 });
