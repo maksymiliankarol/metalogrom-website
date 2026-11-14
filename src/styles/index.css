@@ -199,10 +199,14 @@ pre {
   background: var(--grey-10) !important;
 }
 
-/* Prevent double padding from inline-code styles */
 pre code {
   padding: 0;
   background: none;
+}
+
+:focus-visible {
+  outline: 1px solid var(--black);
+  outline-offset: 1px;
 }
 
 /* Custom styling */
