@@ -36,13 +36,9 @@ const { Content } = await render(entry);
 ---
 
 <Layout {lang} {title} description={entry.data.description}>
-  <p>
-    <a href={backHref}>
-      {t("nav.back")}
-    </a>
-  </p>
-  <section class="individual">
+  <div class="page width-md column gap-md">
+    <p><a href={backHref}>{t("nav.back")}</a></p>
     <h1>{entry.data.title}</h1>
     <Content components={{ Button }} />
-  </section>
+  </div>
 </Layout>

@@ -1,11 +1,11 @@
 {
   "name": "Metalogrom",
   "short_name": "Metalogrom",
-  "description": "Metalogrom is a family of simple yet helpful things.",
+  "description": "Collection of simple and helpful things.",
   "start_url": "/",
   "display": "browser",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#e5e5e5",
+  "theme_color": "#e5e5e5",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },

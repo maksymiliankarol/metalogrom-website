@@ -9,18 +9,18 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://metalogrom.com',
   trailingSlash: 'never',
-
   vite: {
     plugins: []
   },
-    integrations: [sitemap({
-      filter: (page) => !page.includes('/404'),
-      i18n: {
-        defaultLocale: defaultLang,
-        locales: Object.fromEntries(
-          Object.entries(languages).map(([code, l]) => [code, l.hreflang])
-        ),
-      },
-    }), mdx()],
-  build: { format: 'file' }
+  integrations: [sitemap({
+    filter: (page) => !page.includes('/404'),
+    i18n: {
+      defaultLocale: defaultLang,
+      locales: Object.fromEntries(
+        Object.entries(languages).map(([code, l]) => [code, l.hreflang])
+      ),
+    },
+  }), mdx()],
+  build: { format: 'file' },
+  markdown: { shikiConfig: { theme: 'github-dark' } }
 });

@@ -12,6 +12,7 @@ const en = {
   'site.description': SITE_DESCRIPTION,
   'home.intro': SITE_DESCRIPTION,
   'home.software': 'Software',
+  'home.others': 'Others',
   'home.language': 'Language',
   'home.contact': 'Contact',
   'home.write': 'Write us:',
@@ -27,9 +28,10 @@ type Dict = Record<UIKey, string>;
 export const ui: Record<Lang, Partial<Dict>> & { en: Dict } = {
   en,
   pl: {
-    'site.description': 'Metalogrom to kolekcja prostych i pomocnych rzeczy.',
-    'home.intro': 'Metalogrom to kolekcja prostych i pomocnych rzeczy.',
+    'site.description': 'Kolekcja prostych i pomocnych rzeczy.',
+    'home.intro': 'Kolekcja prostych i pomocnych rzeczy.',
     'home.software': 'Programy',
+    'home.others': 'Inne',
     'home.language': 'Język',
     'home.contact': 'Kontakt',
     'home.write': 'Napisz do nas:',
