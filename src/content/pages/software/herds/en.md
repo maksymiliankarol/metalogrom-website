@@ -8,5 +8,5 @@ There are people in your city who may be more important and worth talking to, or
 So Herds is about the people around you and what they do in your city. We split the city into rooms, which are basically live chats. A room could be "food," "concerts," "education," or anything related to living in that place. We hope you join.
 
 - [Get Started](https://herds.metalogrom.com)
-- [Terms of Service](https://metalogrom.com/software/herds/terms)
-- [Privacy Policy](https://metalogrom.com/software/herds/privacy)
+- [Terms of Service](/software/herds/terms)
+- [Privacy Policy](/software/herds/privacy)

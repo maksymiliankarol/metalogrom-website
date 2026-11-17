@@ -1,0 +1,10 @@
+---
+import Home from '../../components/Home.astro';
+import { getLang, getLangPaths } from '../../i18n/utils';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.params.lang);
+---
+
+<Home {lang} />

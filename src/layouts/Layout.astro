@@ -1,29 +1,12 @@
 ---
 import '../styles/index.css';
+import type { ComponentProps } from 'astro/types';
 import SEO from '../components/SEO.astro';
-import JsonLd from '../components/JsonLd.astro';
-import { SITE_NAME } from '../data/site';
-import { getPageGraph } from '../data/schema';
 import { defaultLang } from '../i18n/ui';
-import type { Lang } from '../i18n/ui';
-import { normalizePath, useTranslations } from '../i18n/utils';
 
-interface Props {
-  lang?: Lang;
-  title?: string;
-  description?: string;
-  canonicalPath?: string;
-  noindex?: boolean;
-  image?: string;
-  imageAlt?: string;
-  type?: 'website' | 'article';
-}
+type Props = ComponentProps<typeof SEO>;
 
-const { lang = defaultLang, title, description, canonicalPath, noindex, image, imageAlt, type } = Astro.props;
-
-const t = useTranslations(lang);
-const metaDescription = description ?? t('site.description');
-const pageUrl = new URL(normalizePath(canonicalPath ?? Astro.url.pathname), Astro.site).href;
+const { lang = defaultLang } = Astro.props;
 ---
 
 <!doctype html>
@@ -37,8 +20,7 @@ const pageUrl = new URL(normalizePath(canonicalPath ?? Astro.url.pathname), Astr
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="generator" content={Astro.generator} />
-    <SEO {lang} {title} description={metaDescription} {canonicalPath} {noindex} {image} {imageAlt} {type} />
-    <JsonLd data={getPageGraph({ lang, url: pageUrl, name: title ?? SITE_NAME, description: metaDescription })} />
+    <SEO {...Astro.props} />
   </head>
   <body>
     <main>

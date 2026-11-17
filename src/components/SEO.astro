@@ -1,8 +1,10 @@
 ---
-import { SITE_NAME, SITE_DESCRIPTION } from '../data/site';
+import { SITE_NAME } from '../data/site';
+import { getPageGraph } from '../data/schema';
 import { defaultLang, languages } from '../i18n/ui';
 import type { Lang } from '../i18n/ui';
-import { langs, localePath, normalizePath, stripLang } from '../i18n/utils';
+import { langs, localePath, normalizePath, stripLang, useTranslations } from '../i18n/utils';
+import JsonLd from './JsonLd.astro';
 
 interface Props {
   lang?: Lang;
@@ -21,7 +23,7 @@ const DEFAULT_IMAGE_ALT = 'Metalogrom';
 const {
   lang = defaultLang,
   title,
-  description = SITE_DESCRIPTION,
+  description,
   canonicalPath = Astro.url.pathname,
   noindex = false,
   image = DEFAULT_IMAGE,
@@ -29,6 +31,8 @@ const {
   type = 'website',
 } = Astro.props;
 
+const t = useTranslations(lang);
+const metaDescription = description ?? t('site.description');
 const abs = (p: string) => new URL(p, Astro.site).href;
 
 // Homepage: just the site name. Other pages: "Page title | Metalogrom"
@@ -48,7 +52,7 @@ const otherLocales = langs.filter((l) => l !== lang).map((l) => languages[l].ogL
 ---
 
 <title>{fullTitle}</title>
-<meta name="description" content={description} />
+<meta name="description" content={metaDescription} />
 <link rel="canonical" href={canonicalURL} />
 <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
 {!noindex && alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
@@ -58,7 +62,7 @@ const otherLocales = langs.filter((l) => l !== lang).map((l) => languages[l].ogL
 <meta property="og:site_name" content={SITE_NAME} />
 <meta property="og:type" content={type} />
 <meta property="og:title" content={fullTitle} />
-<meta property="og:description" content={description} />
+<meta property="og:description" content={metaDescription} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:image" content={imageURL} />
 <meta property="og:image:alt" content={imageAlt} />
@@ -71,6 +75,7 @@ const otherLocales = langs.filter((l) => l !== lang).map((l) => languages[l].ogL
 <meta name="twitter:site" content="@metalogrom" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:description" content={metaDescription} />
 <meta name="twitter:image" content={imageURL} />
 <meta name="twitter:image:alt" content={imageAlt} />
+<JsonLd data={getPageGraph({ lang, url: canonicalURL, name: title ?? SITE_NAME, description: metaDescription })} />

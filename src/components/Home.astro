@@ -1,9 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getPages, listPages } from '../data/pages';
-import { languages } from '../i18n/ui';
 import type { Lang } from '../i18n/ui';
-import { langs, localePath, useTranslations } from '../i18n/utils';
+import { localePath, useTranslations } from '../i18n/utils';
 import Hexagon from './Hexagon.astro';
 
 interface Props {
@@ -22,7 +21,7 @@ const software = listPages(await getPages(), 'software', lang);
         <Hexagon size={42}/>
         <h1>Metalogrom</h1>
       </div>
-      <p>{t('home.intro')}</p>
+      <p>{t('site.description')}</p>
     </div>
     <div class="column gap-sm">
       <h3>{t('home.software')}</h3>
@@ -39,8 +38,8 @@ const software = listPages(await getPages(), 'software', lang);
     <div class="column gap-sm">
       <h3>{t('home.others')}</h3>
       <div>
-        <p><a href="">{t('home.language')}</a></p>
-        <p><a href="">{t('home.contact')}</a></p>
+        <p><a href={localePath('/language', lang)}>{t('home.language')}</a></p>
+        <p><a href={localePath('/contact', lang)}>{t('home.contact')}</a></p>
       </div>
     </div>
   </section>

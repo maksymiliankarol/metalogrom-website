@@ -204,10 +204,3 @@ q::before,
 q::after {
   content: none;
 }
-
-/* Creates an explicit stacking context on the app root.
-   Prevents z-index bleed from portals, modals, or tooltips
-   from leaking out unexpectedly. */
-#root {
-  isolation: isolate;
-}

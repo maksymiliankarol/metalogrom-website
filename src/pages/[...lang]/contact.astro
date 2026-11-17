@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLang, getLangPaths, localePath, useTranslations } from '../../i18n/utils';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.params.lang);
+const t = useTranslations(lang);
+const EMAIL = 'help@metalogrom.com';
+---
+
+<Layout {lang} title={t('home.contact')}>
+  <div class="page width-md column gap-md">
+    <p><a href={localePath('/', lang)}>{t('nav.back')}</a></p>
+    <h1>{t('home.contact')}</h1>
+    <p>{t('home.write')} <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+  </div>
+</Layout>

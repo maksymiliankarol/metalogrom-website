@@ -56,6 +56,13 @@ export function parentPath(pages: PageMap, path: string): string {
   return '';
 }
 
+/** "Deals: Terms" for child pages, plain "Deals" for top-level ones. */
+export function pageTitle(pages: PageMap, path: string, lang: Lang): string {
+  const title = pickEntry(pages, path, lang)!.data.title;
+  const parent = parentPath(pages, path);
+  return parent ? `${pickEntry(pages, parent, lang)!.data.title}: ${title}` : title;
+}
+
 /** Direct children of a folder, e.g. listPages(pages, 'software', 'pl'). */
 export function listPages(pages: PageMap, prefix: string, lang: Lang) {
   const depth = prefix.split('/').length + 1;

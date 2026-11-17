@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { languages } from '../../i18n/ui';
+import { getLang, getLangPaths, langs, localePath, useTranslations } from '../../i18n/utils';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.params.lang);
+const t = useTranslations(lang);
+---
+
+<Layout {lang} title={t('home.language')}>
+  <div class="page width-md column gap-md">
+    <p><a href={localePath('/', lang)}>{t('nav.back')}</a></p>
+    <h1>{t('home.language')}</h1>
+    <ul>
+      {langs.map((l) => (
+        <li>
+          {l === lang ? (
+            <strong aria-current="true">{languages[l].label}</strong>
+          ) : (
+            <a href={localePath('/language', l)} hreflang={languages[l].hreflang}>
+              {languages[l].label}
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>

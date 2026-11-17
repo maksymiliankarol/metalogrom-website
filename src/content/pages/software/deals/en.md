@@ -7,6 +7,6 @@ We buy and sell products and services. Some of us act as individuals, others on 
 
 Deals fixes that by matching buyers and sellers as accurately as we can.
 
-- [Installation](https://metalogrom.com/software/deals/installation)
-- [Terms of Service](https://metalogrom.com/software/deals/terms)
-- [Privacy Policy](https://metalogrom.com/software/deals/privacy)
+- [Installation](/software/deals/installation)
+- [Terms of Service](/software/deals/terms)
+- [Privacy Policy](/software/deals/privacy)

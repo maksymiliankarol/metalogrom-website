@@ -10,15 +10,12 @@ export const defaultLang: Lang = 'en';
 
 const en = {
   'site.description': SITE_DESCRIPTION,
-  'home.intro': SITE_DESCRIPTION,
   'home.software': 'Software',
   'home.others': 'Others',
   'home.language': 'Language',
   'home.contact': 'Contact',
   'home.write': 'Write us:',
   'nav.back': 'Back',
-  'notFound.title': 'Page not found',
-  'notFound.text': "The page you're looking for doesn't exist.",
 } as const;
 
 export type UIKey = keyof typeof en;
@@ -29,15 +26,12 @@ export const ui: Record<Lang, Partial<Dict>> & { en: Dict } = {
   en,
   pl: {
     'site.description': 'Kolekcja prostych i pomocnych rzeczy.',
-    'home.intro': 'Kolekcja prostych i pomocnych rzeczy.',
     'home.software': 'Programy',
     'home.others': 'Inne',
     'home.language': 'Język',
     'home.contact': 'Kontakt',
     'home.write': 'Napisz do nas:',
     'nav.back': 'Wstecz',
-    'notFound.title': 'Nie znaleziono strony',
-    'notFound.text': 'Strona, której szukasz, nie istnieje.',
   },
 };
 

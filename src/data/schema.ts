@@ -2,7 +2,7 @@ import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from './site';
 import { languages } from '../i18n/ui';
 import type { Lang } from '../i18n/ui';
 
-export const organizationSchema = {
+const organizationSchema = {
   '@type': 'Organization',
   '@id': `${SITE_URL}/#organization`,
   name: SITE_NAME,
@@ -15,7 +15,7 @@ export const organizationSchema = {
   sameAs: ['https://x.com/metalogrom'],
 };
 
-export const websiteSchema = {
+const websiteSchema = {
   '@type': 'WebSite',
   '@id': `${SITE_URL}/#website`,
   url: SITE_URL,
