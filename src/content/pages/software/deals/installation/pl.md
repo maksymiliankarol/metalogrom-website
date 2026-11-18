@@ -5,7 +5,7 @@ description: Jak zainstalować i używać Deals
 
 Deals to aplikacja działająca w wierszu poleceń (CLI). Do jej obsługi potrzebna jest swoboda w pracy z terminalem.
 
-## Linux i macOS
+**Linux i macOS**
 
 ```bash
 curl -fsSL https://deals-api.metalogrom.com/install-cli | sh
@@ -25,10 +25,20 @@ Sprawdź, czy wszystko działa:
 deals version
 ```
 
-Aby zaktualizować aplikację, uruchom to samo polecenie jeszcze raz.
+Aby zaktualizować aplikację, uruchom:
 
-## Windows
+```bash
+deals update
+```
+
+Polecenie instaluje najnowszą wersję w katalogu, w którym aktualnie znajduje się `deals`. Jeśli ten katalog wymaga uprawnień administratora (np. `/usr/local/bin`), uruchom `sudo deals update`.
+
+`deals` sprawdza też mniej więcej raz dziennie, czy jest nowa wersja, i wyświetla w terminalu komunikat, gdy jest dostępna.
+
+**Windows**
 
 Pobierz plik `deals_windows_amd64.zip` z
 [najnowszego wydania](https://github.com/maksymiliankarol/deals-cli/releases/latest),
 rozpakuj go i umieść `deals.exe` w folderze, który jest w zmiennej `PATH`.
+
+Aby zaktualizować aplikację, pobierz plik zip jeszcze raz i podmień `deals.exe`.

@@ -25,10 +25,20 @@ Check that it worked:
 deals version
 ```
 
-To upgrade, run the same command again.
+To upgrade, run:
+
+```bash
+deals update
+```
+
+It installs the latest version into the folder where `deals` currently lives. If that folder needs root (like `/usr/local/bin`), run `sudo deals update`.
+
+`deals` also checks for a new version about once a day and prints a notice in your terminal when one is available.
 
 **Windows**
 
 Download `deals_windows_amd64.zip` from the
 [latest release](https://github.com/maksymiliankarol/deals-cli/releases/latest),
 unzip it, and put `deals.exe` in a folder that's in your `PATH`.
+
+To upgrade, download the zip again and replace `deals.exe`.

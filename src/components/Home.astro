@@ -1,9 +1,10 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.svg';
 import Layout from '../layouts/Layout.astro';
 import { getPages, listPages } from '../data/pages';
 import type { Lang } from '../i18n/ui';
 import { localePath, useTranslations } from '../i18n/utils';
-import Hexagon from './Hexagon.astro';
 
 interface Props {
   lang: Lang;
@@ -17,10 +18,8 @@ const software = listPages(await getPages(), 'software', lang);
 <Layout lang={lang}>
   <section class="page width-sm column gap-lg">
     <div class="column gap-sm">
-      <div class="logo">
-        <Hexagon size={42}/>
-        <h1>Metalogrom</h1>
-      </div>
+      <Image src={logo} class="logo" width="48" alt="Metalogrom" />
+      <h1>Metalogrom</h1>
       <p>{t('site.description')}</p>
     </div>
     <div class="column gap-sm">
