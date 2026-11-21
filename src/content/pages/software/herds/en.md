@@ -3,9 +3,9 @@ title: Herds
 description: Chat with people in your city.
 ---
 
-There are people in your city who may be more important and worth talking to, or even meeting, than someone miles away whom you found on social media. 
+Herds is a live chat for your city. No account. Find your city, pick a room (for example "events"), talk.
 
-So Herds is about the people around you and what they do in your city. We split the city into rooms, which are basically live chats. A room could be "food," "concerts," "education," or anything related to living in that place. We hope you join.
+There's also a small news section. Just what's happening around town.
 
 - [Get Started](https://herds.metalogrom.com)
 - [Terms of Service](/software/herds/terms)

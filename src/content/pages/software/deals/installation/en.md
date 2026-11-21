@@ -5,7 +5,7 @@ description: How to install and use Deals
 
 Deals is a command line app (CLI). You'll need to be comfortable with a terminal to use it.
 
-**Linux and macOS**
+## Linux and macOS
 
 ```bash
 curl -fsSL https://deals-api.metalogrom.com/install-cli | sh
@@ -35,7 +35,7 @@ It installs the latest version into the folder where `deals` currently lives. If
 
 `deals` also checks for a new version about once a day and prints a notice in your terminal when one is available.
 
-**Windows**
+## Windows
 
 Download `deals_windows_amd64.zip` from the
 [latest release](https://github.com/maksymiliankarol/deals-cli/releases/latest),
