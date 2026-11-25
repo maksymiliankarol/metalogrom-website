@@ -3,6 +3,8 @@ title: Regulamin
 description: Zasady korzystania z Deals.
 ---
 
+*Ostatnia aktualizacja: 24 listopada 2026*
+
 Deals pozwala kupującym opisać, czego potrzebują, a sprzedawcom zapłacić za kontakt z nimi. Jest udostępniany w stanie, w jakim jest. Korzystając z niego, akceptujesz ten regulamin.
 
 - Musisz mieć co najmniej 18 lat.

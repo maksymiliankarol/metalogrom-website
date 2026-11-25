@@ -3,6 +3,8 @@ title: Privacy
 description: What Deals stores and why.
 ---
 
+*Last updated: 24 November 2026*
+
 Deals has no accounts. Here is everything it handles.
 
 - **A buyer's request** (description, email and phone number) is stored on our servers so sellers can find it. The description is visible to anyone who searches. The email and phone number are shown only to the one seller who pays to unlock the request.

@@ -22,24 +22,18 @@ const software = listPages(await getPages(), 'software', lang);
       <h1>Metalogrom</h1>
       <p>{t('site.description')}</p>
     </div>
-    <div class="column gap-sm">
-      <h3>{t('home.software')}</h3>
-      <div>
-        {software.map((item) => (
-          <p>
-            <a href={localePath(`/${item.path}`, lang)}>{item.title}</a>
-            {" - "}{item.description}
-          </p>
-        ))}
-      </div>
+    <div>
+      {software.map((item) => (
+        <p>
+          <a href={localePath(`/${item.path}`, lang)}>{item.title}</a>
+          {" - "}{item.description}
+        </p>
+      ))}
     </div>
 
-    <div class="column gap-sm">
-      <h3>{t('home.others')}</h3>
-      <div>
-        <p><a href={localePath('/language', lang)}>{t('home.language')}</a></p>
-        <p><a href={localePath('/contact', lang)}>{t('home.contact')}</a></p>
-      </div>
+    <div>
+      <p><a href={localePath('/language', lang)}>{t('home.language')}</a></p>
+      <p><a href={localePath('/contact', lang)}>{t('home.contact')}</a></p>
     </div>
   </section>
 </Layout>

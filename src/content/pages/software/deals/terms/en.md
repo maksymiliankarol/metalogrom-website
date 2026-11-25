@@ -3,6 +3,8 @@ title: Terms
 description: Rules for using Deals.
 ---
 
+*Last updated: 24 November 2026*
+
 Deals lets buyers post what they need and sellers pay to contact them. It is provided as is. By using it you agree to these terms.
 
 - You must be at least 18 years old.

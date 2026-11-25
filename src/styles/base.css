@@ -40,7 +40,7 @@ pre,
 kbd,
 samp {
   font-family: var(--font-mono);
-  font-size: 0.9em;
+  font-size: 0.875em;
 }
 
 /* Inline code */

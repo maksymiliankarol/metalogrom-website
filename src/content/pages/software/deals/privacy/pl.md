@@ -3,6 +3,8 @@ title: Prywatność
 description: Co Deals przechowuje i dlaczego.
 ---
 
+*Ostatnia aktualizacja: 24 listopada 2026*
+
 Deals nie ma kont użytkowników. Oto wszystko, czym się zajmuje.
 
 - **Zgłoszenie kupującego** (opis, e-mail i telefon) jest przechowywane na naszych serwerach, aby sprzedawcy mogli je znaleźć. Opis widzi każdy, kto wyszukuje. E-mail i telefon zobaczy tylko ten jeden sprzedawca, który zapłaci za odblokowanie zgłoszenia.

@@ -5,7 +5,7 @@ description: Kupuj lub sprzedawaj produkty i usługi.
 
 Deals to trochę jak przetargi, tylko łatwiejsze i dla każdego.
 
-Sprzedajesz? Sprawdź, kto szuka tego, co oferujesz. Odblokuj kontakt. Jeden sprzedawca na zapytanie, więc nikt Cię nie ubiegnie.
+Sprzedajesz? Sprawdź, kto szuka tego, co oferujesz. Odblokuj kontakt. Tylko Ty, nikt inny.
 
 Kupujesz? Dodaj to, czego szukasz, i tyle. Właściwa osoba (lub firma) skontaktuje się z Tobą.
 
