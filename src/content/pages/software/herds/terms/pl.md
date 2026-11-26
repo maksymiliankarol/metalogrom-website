@@ -20,7 +20,7 @@ Herds to bezpłatny czat dla ludzi z tego samego miasta, udostępniany w stanie,
 
 Każdy może kupić reklamę w kolumnie wiadomości wybranego pokoju. Reklamy pojawiają się tam obok naszych własnych wpisów.
 
-- Reklama kosztuje 5,00 USD, płatność odbywa się przez Stripe, a reklama jest wyświetlana przez 7 dni.
+- Reklama kosztuje 49,00 PLN, płatność odbywa się przez Stripe, a reklama jest wyświetlana przez 7 dni.
 - Reklamy pojawiają się o 00:00 UTC w wybranym dniu (może to potrwać do godziny). Liczba reklam w pokoju na dany dzień jest ograniczona.
 - Reklama ma od 20 do 500 znaków i obsługuje podstawowe formatowanie oraz linki.
 - Odpowiadasz za swoją reklamę i za strony, do których prowadzi. Zakaz spamu, oszustw, mowy nienawiści, gróźb, treści dla dorosłych, treści niezgodnych z prawem i wprowadzających w błąd.

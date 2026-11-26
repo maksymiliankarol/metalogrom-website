@@ -10,9 +10,13 @@ export const defaultLang: Lang = 'en';
 
 const en = {
   'site.description': SITE_DESCRIPTION,
-  'home.language': 'Language',
+  'home.settings': 'Settings',
   'home.contact': 'Contact',
   'home.write': 'Write us:',
+  'settings.language': 'Language',
+  'settings.theme': 'Theme',
+  'settings.light': 'Light',
+  'settings.dark': 'Dark',
   'nav.back': 'Back',
 } as const;
 
@@ -24,9 +28,13 @@ export const ui: Record<Lang, Partial<Dict>> & { en: Dict } = {
   en,
   pl: {
     'site.description': 'Kolekcja prostych i pomocnych rzeczy.',
-    'home.language': 'Język',
+    'home.settings': 'Ustawienia',
     'home.contact': 'Kontakt',
     'home.write': 'Napisz do nas:',
+    'settings.language': 'Język',
+    'settings.theme': 'Motyw',
+    'settings.light': 'Jasny',
+    'settings.dark': 'Ciemny',
     'nav.back': 'Wstecz',
   },
 };

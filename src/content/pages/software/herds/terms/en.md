@@ -20,7 +20,7 @@ Herds is a free chat for people in the same city, provided as is. By using it yo
 
 Anyone can buy an ad in a room's news column. Ads appear there next to our own posts.
 
-- An ad costs $5.00, paid through Stripe, and is shown for 7 days.
+- An ad costs $19.00, paid through Stripe, and is shown for 7 days.
 - Ads go live at 00:00 UTC on the day you pick (it may take up to an hour). Each room has a limited number of ads per day.
 - Ads are 20-500 characters and support basic formatting and links.
 - You are responsible for your ad and for what it links to. No spam, scams, hate, threats, adult or illegal content, or misleading claims.

@@ -1,9 +1,9 @@
 ---
-title: Polityki
-description: Regulaminy i polityki prywatności wszystkich naszych programów.
+title: Dokumenty
+description: Regulaminy i polityki prywatności naszych aplikacji.
 ---
 
-Tutaj znajdziesz regulaminy i polityki prywatności każdej z naszych aplikacji.
+Regulaminy i polityki prywatności naszych aplikacji.
 
 **Deals**
 

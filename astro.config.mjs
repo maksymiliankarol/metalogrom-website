@@ -17,5 +17,12 @@ export default defineConfig({
     },
   })],
   build: { format: 'file' },
-  markdown: { shikiConfig: { theme: 'github-dark' } }
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+    },
+  },
 });

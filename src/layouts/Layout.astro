@@ -19,6 +19,28 @@ const { lang = defaultLang } = Astro.props;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#ffffff" />
+    <script is:inline>
+      // Runs before first paint, so there is no flash of the wrong theme.
+      // Keep the colors in sync with --background in base.css.
+      const COLORS = { light: "#ffffff", dark: "#121212" };
+
+      function applyTheme(theme) {
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]').content = COLORS[theme];
+      }
+
+      function setTheme(theme) {
+        document.cookie = `theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
+        applyTheme(theme);
+      }
+
+      const saved = document.cookie.split("; ").find((c) => c.startsWith("theme="))?.split("=")[1];
+      applyTheme(
+        saved === "light" || saved === "dark"
+          ? saved
+          : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
+      );
+    </script>
     <meta name="generator" content={Astro.generator} />
     <SEO {...Astro.props} />
   </head>

@@ -1,17 +1,30 @@
 :root {
   --background: #fff;
   --foreground: #000;
+  --muted: #666666;
   --border: #c2c2c2;
+  --surface: #e6e6e6;
   --link: #00f;
   --error: #f00;
 
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;  
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 2rem;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #121212;
+  --foreground: #eee;
+  --muted: #999;
+  --border: #444;
+  --surface: #2a2a2a;
+  --link: #6ea8ff;
+  --error: #ff6b6b;
 }
 
 /* HTML */
@@ -55,11 +68,17 @@ samp {
 pre {
   padding: var(--space-sm);
   overflow-x: auto;
-  background: var(--foreground) !important;
+  background: var(--surface) !important; /* Shiki sets an inline background */
 }
 
 pre code {
   padding: 0;
+}
+
+/* Shiki dual themes: tokens carry the light colors inline, the dark ones in --shiki-dark */
+:root[data-theme="dark"] .astro-code,
+:root[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark) !important;
 }
 
 :not(pre) > code {
@@ -69,6 +88,28 @@ pre code {
 :focus-visible {
   outline: 2px solid var(--foreground);
   outline-offset: 2px;
+}
+
+/* ---------- Buttons ---------- */
+
+button {
+  padding: var(--space-xs) var(--space-md);
+  align-self: flex-start;
+  font: inherit;
+  color: var(--background);
+  background: var(--foreground);
+  cursor: pointer;
+}
+
+button.full {
+  width: 100%;
+}
+
+button:hover { opacity: 0.8; }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* ---------- Layout ---------- */

@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { languages } from '../../i18n/ui';
+import { getLang, getLangPaths, langs, localePath, useTranslations } from '../../i18n/utils';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.params.lang);
+const t = useTranslations(lang);
+---
+
+<Layout {lang} title={t('home.settings')}>
+  <div class="page width-sm column gap-md">
+    <p><a href={localePath('/', lang)}>{t('nav.back')}</a></p>
+    <h1>{t('home.settings')}</h1>
+
+    <div class="column gap-sm">
+      <label>{t('settings.language')}</label>
+      <ul>
+        {langs.map((l) => (
+          <li>
+            {l === lang ? (
+              <strong aria-current="true">{languages[l].label}</strong>
+            ) : (
+              <a href={localePath('/settings', l)} hreflang={languages[l].hreflang}>
+                {languages[l].label}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="column gap-sm">
+      <label>{t('settings.theme')}</label>
+      <button id="theme-toggle" data-light={t('settings.light')} data-dark={t('settings.dark')}></button>
+    </div>
+  </div>
+
+  <script is:inline>
+    const toggle = document.getElementById("theme-toggle");
+    const isDark = () => document.documentElement.dataset.theme === "dark";
+    const render = () => (toggle.textContent = isDark() ? toggle.dataset.light : toggle.dataset.dark);
+
+    toggle.addEventListener("click", () => {
+      setTheme(isDark() ? "light" : "dark");
+      render();
+    });
+    render();
+  </script>
+</Layout>
